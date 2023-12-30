@@ -1,0 +1,32 @@
+<ul class="category-list">
+  <ng-container
+    *ngFor="let node of categoryList"
+    [ngTemplateOutlet]="treeNode"
+    [ngTemplateOutletContext]="{ $implicit: node }">
+  </ng-container>
+</ul>
+<ng-template #treeNode let-data>
+  <li class="main-child" >
+    <div class="node-name">
+      <span class="n-name" (click)="selectCategory(data)">{{data.name}}</span>
+      <span class="node-action" >
+        <ng-container *ngIf="type == 'manage'">
+          <mat-icon (click)="addNewCategory(data)">add</mat-icon>
+          <mat-icon (click)="editNewCategory(data)">edit</mat-icon>
+        </ng-container>
+        <ng-container *ngIf="type == 'action'">
+          <mat-icon (click)="addNewCategory(data)">check</mat-icon>
+        </ng-container>
+        </span>
+    </div>
+  </li>
+  <ng-container *ngIf="data.children && !data.collapsed">
+    <ul class="child-menu-list">
+      <ng-container
+        *ngFor="let child of data.children"
+        [ngTemplateOutlet]="treeNode"
+        [ngTemplateOutletContext]="{ $implicit: child }">
+      </ng-container>
+    </ul>
+  </ng-container>
+</ng-template>

@@ -1,1 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Roboto-Black";
+  src: url("/assets/fonts/Roboto/Roboto-Black.ttf");
+}
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url("/assets/fonts/Roboto/Roboto-Regular.ttf");
+}
+@font-face {
+  font-family: "Roboto-Medium";
+  src: url("/assets/fonts/Roboto/Roboto-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Oswald-Medium";
+  src: url("/assets/fonts/Oswald/Oswald-Medium.ttf");
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+background: #49228d;}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background: #e7e0f4;
+  .logo {
+    font-size: 15px;
+    padding: 15px;
+    font-family: Oswald-Medium, sans-serif;
+    color: #000;
+    a {
+      color: #4814a5;
+      text-decoration: none;
+    }
+    span {
+      font-size: 20px;
+    }
+  }
+  .action {
+    padding: 10px;
+
+  }
+}
+.header-menu {
+  .sub-menu-content {
+    padding: 5px 10px;
+    a {
+      text-decoration: none;
+      font-family: Roboto-Medium, sans-serif;
+      color: #49228d;
+    }
+  }
+}
+.mat-form-field-infix {
+  display: flex !important;
+}

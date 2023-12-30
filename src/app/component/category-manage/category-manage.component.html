@@ -1,0 +1,8 @@
+<app-header></app-header>
+<div class="category-main-container">
+  <div class="category-action">
+    <h2>Category</h2>
+    <button mat-raised-button color="primary" (click)="addNewCategory()"><mat-icon >add</mat-icon>Add New Category</button>
+  </div>
+  <app-category-tree [type]="'manage'" [categoryList]="categoryList"></app-category-tree>
+</div>

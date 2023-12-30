@@ -1,0 +1,56 @@
+<app-header></app-header>
+<div class="action-main-container">
+  <div class="action-content">
+    <form [formGroup]="actionForm">
+
+      <div class="form-row">
+        <mat-form-field>
+          <mat-label>Earn OR Expense</mat-label>
+          <mat-select formControlName="ft">
+            <mat-option *ngFor="let ft of financeType" [value]="ft">{{ft}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-row">
+        <button mat-raised-button color="primary" (click)="selectCategory()">Select Category</button>
+      </div>
+      <div class="form-row">
+        <mat-form-field>
+          <mat-label>Amount</mat-label>
+          <input matInput formControlName="a" type="number">
+        </mat-form-field>
+      </div>
+      <div class="form-row">
+        <mat-form-field class="example-full-width">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="d">
+          <mat-datepicker-toggle matIconSuffix [for]="picker">
+            <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="form-row">
+          <mat-checkbox (change)="showUser = !showUser">Want to select any user?</mat-checkbox>
+        <mat-form-field *ngIf="showUser">
+          <mat-label>Users</mat-label>
+          <mat-select formControlName="u">
+            <mat-option *ngFor="let u of users" [value]="u.name">{{u.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-row">
+        <mat-form-field>
+          <mat-label>Comment</mat-label>
+          <textarea matInput formControlName="cm" ></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <button mat-raised-button color="primary" (click)="saveTransaction()" [disabled]="actionForm.invalid">Save</button>
+        <br/><br/>
+        <button mat-raised-button color="primary" [routerLink]="['/transactions']">Back To Transactions</button>
+      </div>
+    </form>
+  </div>
+</div>

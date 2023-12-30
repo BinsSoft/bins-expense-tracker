@@ -1,0 +1,15 @@
+.action-main-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  .action-content {
+    width: 80%;
+    padding: 10px;
+    background: #FFFFFF;
+    .form-row {
+      margin: 5px 0;
+    }
+  }
+}

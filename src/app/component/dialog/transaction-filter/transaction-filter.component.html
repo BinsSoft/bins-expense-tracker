@@ -1,0 +1,40 @@
+<div class="filter-main-container">
+
+  <form [formGroup]="searchForm">
+
+    <div class="form-row">
+      <mat-form-field>
+        <mat-label>Earn OR Expense</mat-label>
+        <mat-select formControlName="ft">
+          <mat-option *ngFor="let ft of financeType" [value]="ft">{{ft}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <button mat-raised-button color="primary" (click)="selectCategory()">Select Category</button>
+    </div>
+    <div class="form-row">
+      <mat-form-field>
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input formControlName="sd" matStartDate placeholder="Start date">
+          <input formControlName="ed" matEndDate placeholder="End date">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-form-field >
+        <mat-label>Users</mat-label>
+        <mat-select formControlName="u">
+          <mat-option *ngFor="let u of users" [value]="u.name">{{u.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <button mat-raised-button color="primary" (click)="filterAction()" >Filter</button>
+    </div>
+  </form>
+</div>

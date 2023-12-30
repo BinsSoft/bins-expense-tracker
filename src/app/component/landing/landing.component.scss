@@ -1,0 +1,22 @@
+.landing-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  .logo {
+    font-size: 25px;
+    padding: 15px;
+    color: #FFF;
+    font-family: Oswald-Medium, sans-serif;
+    label {
+      //display: block;
+    }
+    span {
+      font-size: 40px;
+    }
+  }
+  .action {
+    padding: 10px;
+  }
+}

@@ -1,0 +1,12 @@
+<div class="header">
+  <div class="logo"><a [routerLink]="['/']"> <span>B</span>ins<span>E</span>xpense<span>T</span>racker</a></div>
+  <div class="action">
+    <mat-icon [matMenuTriggerFor]="menu">more_vert</mat-icon>
+    <mat-menu #menu="matMenu" class="header-menu" >
+      <div class="sub-menu-content"><a [routerLink]="['/transactions']">Transactions</a></div>
+      <div class="sub-menu-content"><a [routerLink]="['/action']">Earn / Expense</a></div>
+      <div class="sub-menu-content"><a [routerLink]="['/category']">Category</a></div>
+      <div class="sub-menu-content"><a [routerLink]="['/user']">Users</a></div>
+    </mat-menu>
+  </div>
+</div>

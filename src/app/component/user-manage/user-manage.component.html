@@ -1,0 +1,17 @@
+<app-header></app-header>
+<div class="users-main-container">
+  <div class="users-action">
+    <h2>Users</h2>
+    <button mat-raised-button color="primary" (click)="addNewUser()"><mat-icon >add</mat-icon>Add New User</button>
+  </div>
+  <div class="users-list">
+    <ul>
+      <li *ngFor="let u of usersList">
+        <div class="u-name">{{u.name}}</div>
+        <div class="u-action">
+          <mat-icon (click)="editUser(u)">edit</mat-icon>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
