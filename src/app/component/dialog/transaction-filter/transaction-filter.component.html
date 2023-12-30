@@ -3,7 +3,7 @@
   <form [formGroup]="searchForm">
 
     <div class="form-row">
-      <mat-form-field>
+      <mat-form-field >
         <mat-label>Earn OR Expense</mat-label>
         <mat-select formControlName="ft">
           <mat-option *ngFor="let ft of financeType" [value]="ft">{{ft}}</mat-option>
@@ -11,6 +11,7 @@
       </mat-form-field>
     </div>
     <div class="form-row">
+      <div>{{searchForm.value.c}}</div>
       <button mat-raised-button color="primary" (click)="selectCategory()">Select Category</button>
     </div>
     <div class="form-row">
