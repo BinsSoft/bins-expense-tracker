@@ -1,0 +1,37 @@
+.auth-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  .logo {
+    font-size: 25px;
+    padding: 15px;
+    color: #FFF;
+    font-family: Oswald-Medium, sans-serif;
+    label {
+      //display: block;
+    }
+    span {
+      font-size: 40px;
+    }
+  }
+  .action {
+    position: relative;
+    background: #FFFFFF;
+    padding: 10px;
+    .form-row {
+      padding: 5px;
+    }
+    .message {
+      .success-message {
+        color: #42b03d;
+        font-family: Roboto-Medium, sans-serif;
+      }
+      .error-message {
+        color: #b03d6f;
+        font-family: Roboto-Medium, sans-serif;
+      }
+    }
+  }
+}

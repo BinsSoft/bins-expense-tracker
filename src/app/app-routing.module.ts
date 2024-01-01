@@ -5,6 +5,8 @@ import {ActionComponent} from "./component/action/action.component";
 import {CategoryManageComponent} from "./component/category-manage/category-manage.component";
 import {UserManageComponent} from "./component/user-manage/user-manage.component";
 import {TransactionsComponent} from "./component/transactions/transactions.component";
+import {AuthenticateonComponent} from "./component/authenticateon/authenticateon.component";
+import {LayoutComponent} from "./component/layout/layout.component";
 
 const routes: Routes = [
   {
@@ -12,21 +14,32 @@ const routes: Routes = [
     component: LandingComponent
   },
   {
-    path: 'action',
-    component: ActionComponent
+    path: 'auth',
+    component: AuthenticateonComponent
   },
   {
-    path: 'category',
-    component: CategoryManageComponent
-  },
-  {
-    path: 'transactions',
-    component: TransactionsComponent
-  },
-  {
-    path: 'user',
-    component: UserManageComponent
+    path:'',
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'action',
+        component: ActionComponent
+      },
+      {
+        path: 'category',
+        component: CategoryManageComponent
+      },
+      {
+        path: 'transactions',
+        component: TransactionsComponent
+      },
+      {
+        path: 'user',
+        component: UserManageComponent
+      }
+    ]
   }
+
 ];
 
 @NgModule({

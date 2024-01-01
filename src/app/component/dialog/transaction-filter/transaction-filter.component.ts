@@ -3,6 +3,7 @@ import {CommonService} from "../../../service/common.service";
 import {CategoryActionComponent} from "../category-action/category-action.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {TransactionService} from "../../../service/transaction.service";
 
 @Component({
   selector: 'app-transaction-filter',
@@ -11,7 +12,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class TransactionFilterComponent implements OnInit {
   searchForm: FormGroup;
-  constructor(private commonService: CommonService, private dialog: MatDialog, private fb: FormBuilder, public dialogRef: MatDialogRef<TransactionFilterComponent>) {
+  constructor(
+    private transactionService: TransactionService,
+    private commonService: CommonService, private dialog: MatDialog, private fb: FormBuilder, public dialogRef: MatDialogRef<TransactionFilterComponent>) {
     this.searchForm = this.fb.group({
       ft: [null],
       c: [null ],
@@ -28,9 +31,8 @@ export class TransactionFilterComponent implements OnInit {
   categoryList: any = [];
   users: any = [];
   ngOnInit(): void {
-
-    this.categoryList = this.commonService.categoryInit();
-    this.users = this.commonService.getUsersList();
+    this.categoryList = this.transactionService.getAllCategory();
+    this.users = this.transactionService.getAllUsers();
   }
   selectCategory() {
     this.dialog.open(CategoryActionComponent, {

@@ -55,3 +55,23 @@ background: #49228d;}
 .mat-form-field-infix {
   display: flex !important;
 }
+
+.spinner {
+  position: absolute;
+  z-index: 999;
+  background: rgba(0,0,0,0.5);
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+  mat-icon {
+    animation: spinner 1.5s linear infinite;
+  }
+}
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}

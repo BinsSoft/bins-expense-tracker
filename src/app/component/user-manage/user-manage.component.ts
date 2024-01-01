@@ -3,6 +3,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {CommonService} from "../../service/common.service";
 import {CategoryAddComponent} from "../dialog/category-add/category-add.component";
 import {UsersAddComponent} from "../dialog/users-add/users-add.component";
+import {TransactionService} from "../../service/transaction.service";
 
 @Component({
   selector: 'app-user-manage',
@@ -12,10 +13,14 @@ import {UsersAddComponent} from "../dialog/users-add/users-add.component";
 export class UserManageComponent implements OnInit {
 
   usersList: any =[];
-  constructor(public dialog: MatDialog, private commonService: CommonService) { }
+  constructor(
+    public dialog: MatDialog, private commonService: CommonService, private transactionService: TransactionService) { }
 
   ngOnInit(): void {
-    this.usersList = this.commonService.getUsersList();
+    this.transactionService.users.subscribe((response: any)=>{
+      this.usersList = response;
+    });
+    this.usersList = this.transactionService.getAllUsers();
   }
 
   addNewUser() {
@@ -24,7 +29,8 @@ export class UserManageComponent implements OnInit {
        this.usersList.push({
          name: result
        })
-        this.commonService.setUsers(this.usersList);
+        this.transactionService.userList = this.usersList;
+       this.transactionService.updateConfig();
       }
     });
   }
@@ -38,7 +44,8 @@ export class UserManageComponent implements OnInit {
     }).afterClosed().subscribe((result:any)=>{
       if (result) {
        data.name = result;
-        this.commonService.setUsers(this.usersList);
+        this.transactionService.userList = this.usersList;
+        this.transactionService.updateConfig();
       }
     });
   }

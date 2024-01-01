@@ -4,6 +4,7 @@ import {CommonService} from "../../service/common.service";
 import {MatDialog} from "@angular/material/dialog";
 import {CategoryActionComponent} from "../dialog/category-action/category-action.component";
 import {Router} from "@angular/router";
+import {TransactionService} from "../../service/transaction.service";
 
 @Component({
   selector: 'app-action',
@@ -14,7 +15,9 @@ export class ActionComponent implements OnInit {
   actionForm: FormGroup;
   transactionList: any = [];
 
-  constructor(private fb: FormBuilder, private commonService: CommonService, private dialog: MatDialog, private router:Router) {
+  constructor(
+    private transactionService: TransactionService,
+    private fb: FormBuilder, private commonService: CommonService, private dialog: MatDialog, private router:Router) {
     this.actionForm = this.fb.group({
       ft: [null, [Validators.required]],
       c: [null, [Validators.required]],
@@ -35,9 +38,9 @@ export class ActionComponent implements OnInit {
   showUser: boolean = false;
   ngOnInit(): void {
 
-    this.categoryList = this.commonService.categoryInit();
-    this.transactionList = this.commonService.getTransactionList();
-    this.users = this.commonService.getUsersList();
+    this.categoryList = this.transactionService.getAllCategory();
+    this.transactionList = this.transactionService.getAllTransactions();
+    this.users = this.transactionService.getAllUsers();
   }
 
   selectCategory() {

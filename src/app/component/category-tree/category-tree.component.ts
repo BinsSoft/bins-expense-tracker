@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CommonService} from "../../service/common.service";
 import {CategoryAddComponent} from "../dialog/category-add/category-add.component";
 import {MatDialog} from "@angular/material/dialog";
+import {TransactionService} from "../../service/transaction.service";
 
 @Component({
   selector: 'app-category-tree',
@@ -14,7 +15,9 @@ export class CategoryTreeComponent implements OnInit {
   @Input('categoryList')categoryList: any = [];
   @Output('select') onSelect = new EventEmitter<any>();
 
-  constructor(public dialog: MatDialog,private commonService: CommonService) { }
+  constructor(
+    private transactionService: TransactionService,
+    public dialog: MatDialog,private commonService: CommonService) { }
 
   ngOnInit(): void {
 
@@ -23,7 +26,8 @@ export class CategoryTreeComponent implements OnInit {
     this.dialog.open(CategoryAddComponent).afterClosed().subscribe((result:any)=>{
       if (result) {
         this.commonService.appendCategory(result, data);
-        this.commonService.setCategoryList(this.categoryList);
+        this.transactionService.categoryList = this.categoryList;
+        this.transactionService.updateConfig();
       }
     });
   }
@@ -33,8 +37,9 @@ export class CategoryTreeComponent implements OnInit {
     }).afterClosed().subscribe((result:any)=>{
       if (result) {
         data.name = result;
-        this.commonService.categoryList = this.categoryList;
-        window.localStorage.setItem('_c', JSON.stringify(this.categoryList));
+        this.transactionService.categoryList = this.categoryList;
+        console.log(this.transactionService.categoryList);
+        this.transactionService.updateConfig();
       }
     });
   }

@@ -1,27 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonService} from "../../service/common.service";
 import {MatDialog} from "@angular/material/dialog";
 import {TransactionFilterComponent} from "../dialog/transaction-filter/transaction-filter.component";
+import {TransactionService} from "../../service/transaction.service";
 
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
   styleUrls: ['./transactions.component.scss']
 })
-export class TransactionsComponent implements OnInit {
+export class TransactionsComponent implements OnInit, OnDestroy {
 
   transactionList:any = [];
   totalEarn: any = 0;
   totalExpense:any = 0;
   isFilter: boolean = false;
-  constructor(private commonService: CommonService, public dialog: MatDialog) { }
+  constructor(
+    private transactionService: TransactionService,
+    private commonService: CommonService, public dialog: MatDialog) { }
+
+  ngOnDestroy(): void {
+    }
 
   ngOnInit(): void {
     this.getTransactionData();
   }
   getTransactionData() {
-    this.transactionList =  this.commonService.getTransactionList().sort((a:any, b:any)=> b.d - a.d);
+    this.transactionService.transactions.subscribe((response:any)=>{
+      this.generateTransactions(response);
+    })
 
+    this.generateTransactions(this.transactionService.getAllTransactions());
+  }
+
+  generateTransactions(list:any) {
+    this.transactionList = list.sort((a:any, b:any)=> b.d - a.d);
+    this.totalExpense = 0;
+    this.totalEarn = 0;
     this.transactionList.forEach((t:any)=>{
       t.c = t.c.replace(/>/g,' : ')
       if (t.ft == 'Earn') {

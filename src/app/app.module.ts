@@ -17,6 +17,9 @@ import { CategoryActionComponent } from './component/dialog/category-action/cate
 import { TransactionsComponent } from './component/transactions/transactions.component';
 import { UsersAddComponent } from './component/dialog/users-add/users-add.component';
 import { TransactionFilterComponent } from './component/dialog/transaction-filter/transaction-filter.component';
+import { AuthenticateonComponent } from './component/authenticateon/authenticateon.component';
+import {HttpClientModule} from "@angular/common/http";
+import { LayoutComponent } from './component/layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -31,14 +34,17 @@ import { TransactionFilterComponent } from './component/dialog/transaction-filte
     CategoryActionComponent,
     TransactionsComponent,
     UsersAddComponent,
-    TransactionFilterComponent
+    TransactionFilterComponent,
+    AuthenticateonComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule, FormsModule
+    ReactiveFormsModule, FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
