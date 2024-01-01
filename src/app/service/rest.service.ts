@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,9 @@ export class RestService {
   headers: HttpHeaders;
   baseUrl: string = '';
   constructor(private http: HttpClient) {
-    const token: string = 'Z2hwX1Bmejh1eXZNT01NMUVoOUJjNXNkVEVRalRmb3RsNTAzZ3h5Vw==';
+    const token: string = environment.auth;
     this.headers = new HttpHeaders({
-      'Authorization': 'Bearer '+ atob(token),
+      'Authorization': 'Bearer '+ token,
       'X-GitHub-Api-Version': '2022-11-28',
       "Accept": "application/vnd.github+json"
     });
