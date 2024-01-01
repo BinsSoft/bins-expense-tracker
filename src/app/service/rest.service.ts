@@ -10,7 +10,7 @@ export class RestService {
   baseUrl: string = '';
   constructor(private http: HttpClient) {
     this.headers = new HttpHeaders({
-      'Authorization': 'Bearer '+ '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',
+      'Authorization': 'Bearer '+ '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',
       'X-GitHub-Api-Version': '2022-11-28',
       "Accept": "application/vnd.github+json"
     });
