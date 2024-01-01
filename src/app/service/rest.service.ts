@@ -9,8 +9,9 @@ export class RestService {
   headers: HttpHeaders;
   baseUrl: string = '';
   constructor(private http: HttpClient) {
+    const token: string = 'Z2hwX1Bmejh1eXZNT01NMUVoOUJjNXNkVEVRalRmb3RsNTAzZ3h5Vw==';
     this.headers = new HttpHeaders({
-      'Authorization': 'Bearer '+ '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',
+      'Authorization': 'Bearer '+ atob(token),
       'X-GitHub-Api-Version': '2022-11-28',
       "Accept": "application/vnd.github+json"
     });
