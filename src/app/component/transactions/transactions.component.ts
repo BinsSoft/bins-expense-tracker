@@ -30,6 +30,9 @@ export class TransactionsComponent implements OnInit, OnDestroy {
 
   }
   getTransactionData() {
+    this.transactionService.transactions.subscribe((transaction:any)=>{
+      this.generateTransactions(transaction);
+    })
     this.generateTransactions(this.transactionService.getAllTransactions());
     this.transactionService.category.subscribe((category:any)=>{
       this.categoryList = category;
