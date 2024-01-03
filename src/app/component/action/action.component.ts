@@ -43,12 +43,16 @@ export class ActionComponent implements OnInit {
     this.users = this.transactionService.getAllUsers();
   }
 
+  displaySelectedCategory: string = '';
   selectCategory() {
     this.dialog.open(CategoryActionComponent, {
       width: '80%'
     }).afterClosed().subscribe((result:any)=>{
       if (result) {
-        this.actionForm.get('c')?.setValue(result);
+        result.forEach((c:any)=>{
+          this.displaySelectedCategory += c.name+" ";
+        })
+        this.actionForm.get('c')?.setValue(result.map((c:any)=> c.id).toString());
       }
     });
   }

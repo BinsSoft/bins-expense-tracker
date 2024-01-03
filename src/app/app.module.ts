@@ -20,6 +20,8 @@ import { TransactionFilterComponent } from './component/dialog/transaction-filte
 import { AuthenticateonComponent } from './component/authenticateon/authenticateon.component';
 import {HttpClientModule} from "@angular/common/http";
 import { LayoutComponent } from './component/layout/layout.component';
+import { CateoryFlagPipe } from './pipes/cateory-flag.pipe';
+import { UserFlagPipe } from './pipes/user-flag.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { LayoutComponent } from './component/layout/layout.component';
     UsersAddComponent,
     TransactionFilterComponent,
     AuthenticateonComponent,
-    LayoutComponent
+    LayoutComponent,
+    CateoryFlagPipe,
+    UserFlagPipe
   ],
   imports: [
     BrowserModule,

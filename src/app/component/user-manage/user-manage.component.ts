@@ -27,6 +27,7 @@ export class UserManageComponent implements OnInit {
     this.dialog.open(UsersAddComponent).afterClosed().subscribe((result:any)=>{
       if (result) {
        this.usersList.push({
+         id: this.usersList.length+1,
          name: result
        })
         this.transactionService.userList = this.usersList;

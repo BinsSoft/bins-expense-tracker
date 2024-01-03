@@ -29,22 +29,21 @@ export class TransactionService {
   fetch() {
     const mobileNo: any = window.sessionStorage.getItem('_user');
     if (mobileNo) {
-      this.restService.getContent(mobileNo+'/transactions.json').subscribe((response:any)=>{
-        this.transactionSha = response.sha;
-
-        this.transactionList = JSON.parse(atob(response.content));
-        this.getAllTransactions();
+      this.restService.getContent(mobileNo+'/config.json').subscribe((response:any)=>{
+        this.configSha = response.sha;
+        const config:any = JSON.parse(atob(response.content));
+        this.userList = config.users;
+        this.categoryList = config.category;
+        this.getAllCategory();
+        this.getAllUsers();
         setTimeout(()=>{
-          this.restService.getContent(mobileNo+'/config.json').subscribe((response:any)=>{
-            this.configSha = response.sha;
-            const config:any = JSON.parse(atob(response.content));
-            this.userList = config.users;
-            this.categoryList = config.category;
-            this.getAllCategory();
-            this.getAllUsers();
+          this.restService.getContent(mobileNo+'/transactions.json').subscribe((response:any)=>{
+            this.transactionSha = response.sha;
+
+            this.transactionList = JSON.parse(atob(response.content));
+            this.getAllTransactions();
           });
         }, 1000)
-
       });
     }
   }
@@ -91,7 +90,7 @@ export class TransactionService {
     }
     const mobileNo: any = window.sessionStorage.getItem('_user');
     this.restService.update(mobileNo + '/config.json', 'Update Config of ' + mobileNo, body, this.configSha).subscribe((response: any) => {
-
+      this.configSha = response.content.sha;
     });
   }
 }

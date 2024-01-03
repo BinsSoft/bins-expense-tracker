@@ -24,7 +24,10 @@ export class CategoryManageComponent implements OnInit {
   addNewCategory() {
     this.dialog.open(CategoryAddComponent).afterClosed().subscribe((result:any)=>{
       if (result) {
-        this.categoryList = this.commonService.appendCategory(result,  this.categoryList);
+        this.categoryList.push({
+          id: this.categoryList.length +1,
+          name: result
+        });
         this.transactionService.categoryList = this.categoryList;
         this.transactionService.updateConfig();
       }

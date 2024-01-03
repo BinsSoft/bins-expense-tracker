@@ -34,12 +34,17 @@ export class TransactionFilterComponent implements OnInit {
     this.categoryList = this.transactionService.getAllCategory();
     this.users = this.transactionService.getAllUsers();
   }
+
+  displaySelectedCategory: string = '';
   selectCategory() {
     this.dialog.open(CategoryActionComponent, {
       width: '80%'
     }).afterClosed().subscribe((result:any)=>{
       if (result) {
-        this.searchForm.value.c = result;
+        result.forEach((c:any)=>{
+          this.displaySelectedCategory += c.name+" ";
+        })
+        this.searchForm.value.c = (result.map((c:any)=> c.id).toString());
       }
     });
   }

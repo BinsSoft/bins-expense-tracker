@@ -23,20 +23,10 @@ export class CommonService {
     return this.categoryList;
   }
   appendCategory(name: string, parent: any) {
-    if (parent == null) parent = this.categoryList;
-    if (Array.isArray(parent)) {
-      parent.push({
-        // parent: (parent.parent)? parent.parent+' > '+parent.name : parent.name,
-        name: name,
-        children: []
-      });
-    } else {
-      parent.children.push({
-        parent: (parent.parent)? parent.parent+'>'+parent.name : parent.name,
-        name: name,
-        children: []
-      });
-    }
+    parent.push({
+      id: parent.length+1,
+      name: name,
+    });
     return parent;
   }
   setCategoryList(category:any) {

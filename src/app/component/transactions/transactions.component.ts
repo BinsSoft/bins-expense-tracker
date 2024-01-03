@@ -15,6 +15,8 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   totalEarn: any = 0;
   totalExpense:any = 0;
   isFilter: boolean = false;
+  categoryList: any =[];
+  userList:any = [];
   constructor(
     private transactionService: TransactionService,
     private commonService: CommonService, public dialog: MatDialog) { }
@@ -24,28 +26,30 @@ export class TransactionsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getTransactionData();
+
   }
   getTransactionData() {
-    this.transactionService.transactions.subscribe((response:any)=>{
-      this.generateTransactions(response);
-    })
-
     this.generateTransactions(this.transactionService.getAllTransactions());
+    this.transactionService.category.subscribe((category:any)=>{
+      this.categoryList = category;
+    });
+    this.transactionService.users.subscribe((users:any)=>{
+      this.userList = users;
+    })
   }
 
   generateTransactions(list:any) {
     this.transactionList = list.sort((a:any, b:any)=> b.d - a.d);
     this.totalExpense = 0;
     this.totalEarn = 0;
-    this.transactionList.forEach((t:any)=>{
-      t.c = t.c.replace(/>/g,' : ')
+    for(let t of this.transactionList) {
       if (t.ft == 'Earn') {
         this.totalEarn += t.a;
       }
       if (t.ft == 'Expense') {
         this.totalExpense += t.a;
       }
-    })
+    }
   }
 
   openTransactionFilter() {
@@ -58,14 +62,14 @@ export class TransactionsComponent implements OnInit, OnDestroy {
         this.transactionList = this.commonService.getTransactionList().sort((a:any, b:any)=> b.d - a.d).filter((tran:any)=>{
           return (filterData) && (
             ((filterData.ft && tran.ft == filterData.ft) || filterData.ft == null) &&
-            ((filterData.c && filterData.c == tran.c) || filterData.c == null) &&
+            ((filterData.c && tran.c.indexOf(filterData.c)> -1) || filterData.c == null) &&
             ((filterData.u && filterData.u == tran.u) || filterData.u == null) &&
             ((filterData.sd && filterData.sd <= tran.d) || filterData.sd == null) &&
             ((filterData.ed && filterData.ed >= tran.d) || filterData.ed == null)
           );
         })
         this.transactionList.forEach((t:any)=>{
-          t.c = t.c.replace(/>/g,' : ')
+
           if (t.ft == 'Earn') {
             this.totalEarn += t.a;
           }
@@ -78,7 +82,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   }
 
   clearFilter() {
-    this.getTransactionData();
+    this.generateTransactions(this.transactionService.getAllTransactions());
     this.isFilter=false;
   }
 }

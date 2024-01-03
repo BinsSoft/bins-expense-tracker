@@ -11,7 +11,7 @@
       </mat-form-field>
     </div>
     <div class="form-row">
-      <div>{{searchForm.value.c}}</div>
+      <div>{{displaySelectedCategory}}</div>
       <button mat-raised-button color="primary" (click)="selectCategory()">Select Category</button>
     </div>
     <div class="form-row">
@@ -30,7 +30,7 @@
       <mat-form-field >
         <mat-label>Users</mat-label>
         <mat-select formControlName="u">
-          <mat-option *ngFor="let u of users" [value]="u.name">{{u.name}}</mat-option>
+          <mat-option *ngFor="let u of users" [value]="u.id">{{u.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>

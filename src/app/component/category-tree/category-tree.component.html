@@ -1,6 +1,6 @@
 <ul class="category-list">
   <ng-container
-    *ngFor="let node of categoryList"
+    *ngFor="let node of rootCategory"
     [ngTemplateOutlet]="treeNode"
     [ngTemplateOutletContext]="{ $implicit: node }">
   </ng-container>

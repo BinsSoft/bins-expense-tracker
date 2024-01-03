@@ -19,8 +19,8 @@
   <div class="trans-list">
     <div class="trans-item" *ngFor="let tran of transactionList">
       <div class="trans-item-left">
-        <div class="trans-c">{{tran.c}}</div>
-        <em>{{tran.u}}</em>
+        <div class="trans-c">{{tran.c| cateoryFlag:categoryList}}</div>
+        <em>{{tran.u|userFlag:userList}}</em><br/>
         <em>{{tran.cm}}</em>
         <div class="trans-d">{{tran.d|date}}</div>
 
