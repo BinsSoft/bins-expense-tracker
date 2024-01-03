@@ -9,7 +9,10 @@
     <div class="group-left">
       <span>Earn</span>
       <label class="earn">{{totalEarn| currency:'INR'}}</label>
-
+    </div>
+    <div class="group-middle">
+      <span>Balance</span>
+      <label [ngClass]="{'earn':totalBalance>0, 'expense': totalBalance<0, 'warning': totalBalance< 100 && totalBalance>0}">{{totalBalance| currency:'INR'}}</label>
     </div>
     <div class="group-right">
       <span>Expense</span>

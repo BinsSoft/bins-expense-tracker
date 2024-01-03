@@ -14,6 +14,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   transactionList:any = [];
   totalEarn: any = 0;
   totalExpense:any = 0;
+  totalBalance:any = 0;
   isFilter: boolean = false;
   categoryList: any =[];
   userList:any = [];
@@ -50,6 +51,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
         this.totalExpense += t.a;
       }
     }
+    this.totalBalance = this.totalEarn - this.totalExpense;
   }
 
   openTransactionFilter() {
@@ -68,15 +70,15 @@ export class TransactionsComponent implements OnInit, OnDestroy {
             ((filterData.ed && filterData.ed >= tran.d) || filterData.ed == null)
           );
         })
-        this.transactionList.forEach((t:any)=>{
-
+        for(let t of this.transactionList) {
           if (t.ft == 'Earn') {
             this.totalEarn += t.a;
           }
           if (t.ft == 'Expense') {
             this.totalExpense += t.a;
           }
-        })
+        }
+        this.totalBalance = this.totalEarn - this.totalExpense;
       }
     });
   }
