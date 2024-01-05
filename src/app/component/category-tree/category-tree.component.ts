@@ -27,7 +27,8 @@ export class CategoryTreeComponent implements OnInit, OnChanges {
       if (result) {
         this.categoryList.push({
           id: this.categoryList.length +1,
-          name: result,
+          name: result.name,
+          repeatDate: (result.isRepeat)? result.repeatDate : 0,
           parent: data.id
         });
         this.transactionService.categoryList = this.categoryList;
@@ -40,7 +41,8 @@ export class CategoryTreeComponent implements OnInit, OnChanges {
       data: data
     }).afterClosed().subscribe((result:any)=>{
       if (result) {
-        data.name = result;
+        data.name = result.name;
+        data.repeatDate = (result.isRepeat)? result.repeatDate : 0;
         this.transactionService.categoryList = this.categoryList;
         this.transactionService.updateConfig();
       }
@@ -81,5 +83,10 @@ export class CategoryTreeComponent implements OnInit, OnChanges {
         this.rootCategory.push(category);
       }
     }
+  }
+
+  deleteCategory(data: any) {
+    this.transactionService.categoryList.splice(this.transactionService.categoryList.findIndex((c:any)=>c.id == data.id),1);
+    this.transactionService.updateConfig();
   }
 }

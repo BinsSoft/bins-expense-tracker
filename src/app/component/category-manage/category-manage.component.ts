@@ -26,7 +26,8 @@ export class CategoryManageComponent implements OnInit {
       if (result) {
         this.categoryList.push({
           id: this.categoryList.length +1,
-          name: result
+          name: result.name,
+          repeatDate : (result.isRepeat)? result.repeatDate : 0,
         });
         this.transactionService.categoryList = this.categoryList;
         this.transactionService.updateConfig();

@@ -30,7 +30,7 @@ export class AuthenticateonComponent implements OnInit {
     const mobileNo: any = this.authForm.value.mobileNo;
     this.restService.checkUser(mobileNo).subscribe((response:any)=>{
       if (response.length >0) {
-        window.sessionStorage.setItem('_user', mobileNo);
+        window.localStorage.setItem('_user', mobileNo);
         this.router.navigate(['/transactions']);
       }
     }, (error:any)=>{

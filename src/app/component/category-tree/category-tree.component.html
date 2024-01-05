@@ -13,6 +13,7 @@
         <ng-container *ngIf="type == 'manage'">
           <mat-icon (click)="addNewCategory(data)">add</mat-icon>
           <mat-icon (click)="editNewCategory(data)">edit</mat-icon>
+          <mat-icon (click)="deleteCategory(data)">delete</mat-icon>
         </ng-container>
         <ng-container *ngIf="type == 'action'">
           <mat-icon (click)="addNewCategory(data)">check</mat-icon>

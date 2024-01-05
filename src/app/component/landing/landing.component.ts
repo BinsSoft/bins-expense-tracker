@@ -11,7 +11,7 @@ export class LandingComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    if (window.sessionStorage.getItem('_user')) {
+    if (window.localStorage.getItem('_user')) {
       this.router.navigate(['/transactions'])
     }
   }
