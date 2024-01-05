@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production --base-href=https://binssoft.github.io/bins-expense-tracker/",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider   && ng build --configuration production --base-href=https://binssoft.github.io/bins-expense-tracker/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

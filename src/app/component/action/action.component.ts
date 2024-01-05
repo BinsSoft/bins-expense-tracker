@@ -59,8 +59,9 @@ export class ActionComponent implements OnInit {
 
   saveTransaction() {
     this.actionForm.value.d = this.actionForm.value.d.getTime();
-    this.transactionList.push(this.actionForm.value);
-    this.commonService.setTransaction(this.transactionList);
+    const transactions = this.commonService.getTransactionList();
+    transactions.push(this.actionForm.value);
+    this.commonService.setTransaction(transactions);
     this.router.navigate(['/transactions'])
   }
 }

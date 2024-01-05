@@ -20,26 +20,24 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   userList:any = [];
   constructor(
     private transactionService: TransactionService,
-    private commonService: CommonService, public dialog: MatDialog) { }
+    private commonService: CommonService, public dialog: MatDialog) {
 
-  ngOnDestroy(): void {
-    }
-
-  ngOnInit(): void {
-    this.getTransactionData();
-
-  }
-  getTransactionData() {
     this.transactionService.transactions.subscribe((transaction:any)=>{
       this.generateTransactions(transaction);
-    })
-    this.generateTransactions(this.transactionService.getAllTransactions());
+    });
     this.transactionService.category.subscribe((category:any)=>{
       this.categoryList = category;
     });
     this.transactionService.users.subscribe((users:any)=>{
       this.userList = users;
     })
+  }
+
+  ngOnDestroy(): void {
+    }
+
+  ngOnInit(): void {
+    this.transactionService.emitAllTransactions();
   }
 
   generateTransactions(list:any) {

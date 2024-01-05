@@ -41,16 +41,18 @@ export class TransactionService {
             this.transactionSha = response.sha;
 
             this.transactionList = JSON.parse(atob(response.content));
-            this.getAllTransactions();
+            this.emitAllTransactions();
           });
         }, 1000)
       });
     }
   }
+  emitAllTransactions() {
+    this.transactionsSubject.next(this.getAllTransactions());
+  }
   getAllTransactions() {
     let transactionList: any = this.transactionList;
     transactionList = transactionList.concat(this.getLocalData('_t'));
-    this.transactionsSubject.next(transactionList);
     return transactionList;
   }
   getLocalData(key:any) {
