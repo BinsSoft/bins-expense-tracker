@@ -27,7 +27,7 @@ export class TransactionService {
   constructor(private restService:RestService) { }
 
   fetch() {
-    const mobileNo: any = window.sessionStorage.getItem('_user');
+    const mobileNo: any = window.localStorage.getItem('_user');
     if (mobileNo) {
       this.restService.getContent(mobileNo+'/config.json').subscribe((response:any)=>{
         this.configSha = response.sha;
@@ -65,7 +65,7 @@ export class TransactionService {
   updateTransactions() {
     const transactions = this.getAllTransactions();
     if (this.getLocalData('_t').length >0) {
-      const mobileNo: any = window.sessionStorage.getItem('_user');
+      const mobileNo: any = window.localStorage.getItem('_user');
       this.restService.update(mobileNo + '/transactions.json', 'Update Transactions of ' + mobileNo, transactions, this.transactionSha).subscribe((response: any) => {
         window.localStorage.setItem('_t', JSON.stringify([]));
       });
@@ -90,7 +90,7 @@ export class TransactionService {
       users: this.getAllUsers(),
       category: this.getAllCategory()
     }
-    const mobileNo: any = window.sessionStorage.getItem('_user');
+    const mobileNo: any = window.localStorage.getItem('_user');
     this.restService.update(mobileNo + '/config.json', 'Update Config of ' + mobileNo, body, this.configSha).subscribe((response: any) => {
       this.configSha = response.content.sha;
     });
