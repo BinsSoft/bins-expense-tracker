@@ -46,7 +46,6 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   }
 
   generateTransactions(list:any) {
-    console.log(list);
     this.transactionList = list.sort((a:any, b:any)=> b.d - a.d);
     this.totalExpense = this.transactionList.filter((t:any)=> t.t == 0).map((t:any)=>t.a).reduce((a:any, b:any) => a + b, 0);
     this.totalEarn  = this.transactionList.filter((t:any)=> t.t == 1).map((t:any)=>t.a).reduce((a:any, b:any) => a + b, 0);
@@ -61,7 +60,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
         this.isFilter = true;
         this.totalExpense = 0;
         this.totalEarn = 0;
-        this.transactionList = this.commonService.getTransactionList().sort((a:any, b:any)=> b.d - a.d).filter((tran:any)=>{
+        this.transactionList = this.transactionService.getAllTransactions().sort((a:any, b:any)=> b.d - a.d).filter((tran:any)=>{
           return (filterData) && (
             ((filterData.c && tran.c.toLowerCase().indexOf(filterData.c.toLowerCase())> -1) || filterData.c == null) &&
             ((filterData.sd && filterData.sd <= tran.d) || filterData.sd == null) &&
