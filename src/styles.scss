@@ -72,6 +72,12 @@ background: #49228d;}
     animation: spinner 1.5s linear infinite;
   }
 }
+.speech-icon {
+  background-image: url("wave.gif");
+  background-size: contain;
+  height: 50px;
+  width: 50px;
+}
 @keyframes spinner {
   to {transform: rotate(360deg);}
 }

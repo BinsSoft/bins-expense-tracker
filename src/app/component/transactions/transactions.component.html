@@ -1,35 +1,36 @@
 <div class="trans-container">
   <div class="trans-action">
     <h2>Transactions</h2>
-    <button [routerLink]="['/action']" mat-raised-button color="accent"><mat-icon>add</mat-icon></button>
+<!--    <button [routerLink]="['/action']" mat-raised-button color="accent"><mat-icon>add</mat-icon></button>-->
+<!--    <button (click)="speechToText()" mat-raised-button color="accent"><mat-icon>add</mat-icon></button>-->
     <button *ngIf="!isFilter" mat-raised-button color="primary" (click)="openTransactionFilter()"><mat-icon>filter_list</mat-icon> Filter</button>
     <button *ngIf="isFilter" mat-raised-button color="primary" (click)="clearFilter()"><mat-icon>filter_list</mat-icon> Clear Filter</button>
   </div>
+
   <div class="trans-group">
-    <div class="group-left">
-      <span>Earn</span>
+    <div class="group-left" (click)="makeTransaction(1)">
+      <span >Credit <mat-icon>add_circle</mat-icon></span>
       <label class="earn">{{totalEarn| currency:'INR'}}</label>
     </div>
     <div class="group-middle">
       <span>Balance</span>
       <label [ngClass]="{'earn':totalBalance>0, 'expense': totalBalance<0, 'warning': totalBalance< 100 && totalBalance>0}">{{totalBalance| currency:'INR'}}</label>
     </div>
-    <div class="group-right">
-      <span>Expense</span>
+    <div class="group-right" (click)="makeTransaction(0)">
+      <span >Debit <mat-icon>add_circle</mat-icon></span>
       <label class="expense">{{totalExpense| currency:'INR'}}</label>
     </div>
   </div>
   <div class="trans-list">
-    <div class="trans-item" *ngFor="let tran of transactionList">
-      <div class="trans-item-left">
-        <div class="trans-c">{{tran.c| cateoryFlag:categoryList}}</div>
-        <em>{{tran.u|userFlag:userList}}</em><br/>
-        <em>{{tran.cm}}</em>
-        <div class="trans-d">{{tran.d|date}}</div>
-
-      </div>
+    <div class="trans-item" *ngFor="let tran of transactionList, let i=index">
+      <div class="trans-item-left" [ngClass]="{'earn':tran.t == 1, 'expense':tran.t == 0}" [innerHTML]="tran.c"></div>
       <div class="trans-item-right">
-        <div class="trans-a" [ngClass]="{'earn':tran.ft == 'Earn', 'expense':tran.ft == 'Expense'}"> {{tran.a | currency:'INR'}} </div>
+        <div class="trans-d">{{tran.d|date}}</div>
+        <mat-icon [matMenuTriggerFor]="menu">more_vert</mat-icon>
+        <mat-menu #menu="matMenu" class="header-menu" >
+          <div class="sub-menu-content"><a (click)="editTransaction(tran,i)">Edit</a></div>
+          <div class="sub-menu-content"><a (click)="deleteTransaction(tran,i)">Delete</a></div>
+        </mat-menu>
       </div>
     </div>
   </div>

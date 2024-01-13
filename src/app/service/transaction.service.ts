@@ -51,6 +51,7 @@ export class TransactionService {
     this.transactionsSubject.next(this.getAllTransactions());
   }
   getAllTransactions() {
+    // this.transactionList = [];
     let transactionList: any = this.transactionList;
     transactionList = transactionList.concat(this.getLocalData('_t'));
     return transactionList;
@@ -70,6 +71,55 @@ export class TransactionService {
         window.localStorage.setItem('_t', JSON.stringify([]));
       });
     }
+  }
+  deleteTransactions(transactionItem: any) {
+    let localData: any = this.getLocalData('_t');
+    let index = null;
+    let isDelete = false;
+    if (localData.length >0) {
+      index = localData.findIndex((t:any)=>t.i == transactionItem.i);
+      if (index > -1) {
+        localData.splice(index,1);
+        window.localStorage.setItem('_t', JSON.stringify(localData));
+        isDelete = true;
+      }
+    }
+    if (!isDelete) {
+      const transactions = this.getAllTransactions();
+      index = transactions.findIndex((t:any)=>t.i == transactionItem.i);
+      transactions.splice(index,1);
+      const mobileNo: any = window.localStorage.getItem('_user');
+      this.restService.update(mobileNo + '/transactions.json', 'Delete Transactions of ' + mobileNo, transactions, this.transactionSha).subscribe((response: any) => {
+        window.localStorage.setItem('_t', JSON.stringify([]));
+      });
+    }
+
+
+  }
+
+  editTransactions(transactionItem: any) {
+    let localData: any = this.getLocalData('_t');
+    let index = null;
+    let isEdit = false;
+    if (localData.length >0) {
+      index = localData.findIndex((t:any)=>t.i == transactionItem.i);
+      if (index > -1) {
+        localData[index] = transactionItem;
+        window.localStorage.setItem('_t', JSON.stringify(localData));
+        isEdit = true;
+      }
+    }
+    if (!isEdit) {
+      const transactions = this.getAllTransactions();
+      index = transactions.findIndex((t:any)=>t.i == transactionItem.i);
+      transactions[index] = transactionItem;
+      const mobileNo: any = window.localStorage.getItem('_user');
+      this.restService.update(mobileNo + '/transactions.json', 'Delete Transactions of ' + mobileNo, transactions, this.transactionSha).subscribe((response: any) => {
+        window.localStorage.setItem('_t', JSON.stringify([]));
+      });
+    }
+
+
   }
 
   getAllCategory() {

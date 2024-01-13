@@ -7,6 +7,7 @@ import {UserManageComponent} from "./component/user-manage/user-manage.component
 import {TransactionsComponent} from "./component/transactions/transactions.component";
 import {AuthenticateonComponent} from "./component/authenticateon/authenticateon.component";
 import {LayoutComponent} from "./component/layout/layout.component";
+import {NotificationsComponent} from "./notifications/notifications.component";
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: 'user',
         component: UserManageComponent
+      },
+      {
+        path: 'notifications',
+        component: NotificationsComponent
       }
     ]
   }

@@ -16,9 +16,7 @@ export class TransactionFilterComponent implements OnInit {
     private transactionService: TransactionService,
     private commonService: CommonService, private dialog: MatDialog, private fb: FormBuilder, public dialogRef: MatDialogRef<TransactionFilterComponent>) {
     this.searchForm = this.fb.group({
-      ft: [null],
       c: [null ],
-      u: [null],
       sd:[],
       ed:[],
     })

@@ -22,6 +22,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { LayoutComponent } from './component/layout/layout.component';
 import { CateoryFlagPipe } from './pipes/cateory-flag.pipe';
 import { UserFlagPipe } from './pipes/user-flag.pipe';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { SpeekToTransactionComponent } from './component/dialog/speek-to-transaction/speek-to-transaction.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { UserFlagPipe } from './pipes/user-flag.pipe';
     AuthenticateonComponent,
     LayoutComponent,
     CateoryFlagPipe,
-    UserFlagPipe
+    UserFlagPipe,
+    NotificationsComponent,
+    SpeekToTransactionComponent
   ],
   imports: [
     BrowserModule,

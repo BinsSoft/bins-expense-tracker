@@ -12,7 +12,10 @@ export class CateoryFlagPipe implements PipeTransform {
   }
   transform(value: any, ...args: any[]): unknown {
     if (args.length > 0  && Array.isArray(args[0]) ) {
-      return args[0].filter((c: any) => value.split(",").indexOf(c.id.toString()) > -1).map((c: any) => c.name).join(" ");
+      value = value.toString();
+      if (value.indexOf(',') > -1) {
+        return args[0].filter((c: any) => value.split(",").indexOf(c.id.toString()) > -1).map((c: any) => c.name).join(" ");
+      }
     }
     return value;
   }

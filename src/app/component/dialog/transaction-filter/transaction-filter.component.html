@@ -4,15 +4,9 @@
 
     <div class="form-row">
       <mat-form-field >
-        <mat-label>Earn OR Expense</mat-label>
-        <mat-select formControlName="ft">
-          <mat-option *ngFor="let ft of financeType" [value]="ft">{{ft}}</mat-option>
-        </mat-select>
+        <mat-label>Search Text</mat-label>
+        <input matInput placeholder="Search Text" formControlName="c">
       </mat-form-field>
-    </div>
-    <div class="form-row">
-      <div>{{displaySelectedCategory}}</div>
-      <button mat-raised-button color="primary" (click)="selectCategory()">Select Category</button>
     </div>
     <div class="form-row">
       <mat-form-field>
@@ -24,14 +18,6 @@
         <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
-      </mat-form-field>
-    </div>
-    <div class="form-row">
-      <mat-form-field >
-        <mat-label>Users</mat-label>
-        <mat-select formControlName="u">
-          <mat-option *ngFor="let u of users" [value]="u.id">{{u.name}}</mat-option>
-        </mat-select>
       </mat-form-field>
     </div>
     <div class="form-row">

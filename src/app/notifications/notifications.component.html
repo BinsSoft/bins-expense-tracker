@@ -1,0 +1,13 @@
+<div class="notify-container">
+  <div class="notify-action">
+    <h2>Notification</h2>
+  </div>
+  <div class="notify-list">
+    <div class="notify-item" *ngFor="let c of categoryList">
+      <div class="left-box">
+        {{c.id | cateoryFlag: categoryList}}
+      </div>
+      <div class="right-box"></div>
+    </div>
+  </div>
+</div>
