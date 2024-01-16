@@ -1,9 +1,16 @@
 <div class="speech-container">
-  <div class="speech-icon" *ngIf="!boo || !speech"></div>
+<!--  <div class="speech-icon" *ngIf="!boo || !speech"></div>-->
   <div class="speech-text">
-    <p *ngIf="!boo || actionForm.invalid">  {{ speech}}</p>
-    <div *ngIf="boo && actionForm.valid ">
-      <textarea [(ngModel)]="voice"></textarea>
+<!--    <p *ngIf="!boo || actionForm.invalid">  {{ speech}}</p>-->
+    <div >
+      <mat-icon (click)="recognize()">mic</mat-icon>
+      <div class="speech-error" *ngIf="boo && actionForm.invalid && speech">
+        Didn't get that. <a (click)="recognize()">Try again</a>
+      </div>
+      <textarea [(ngModel)]="speech" ></textarea>
+
+
+
       <div class="form-row">
         <mat-form-field class="example-full-width">
           <mat-label>Choose a date</mat-label>
@@ -17,7 +24,5 @@
       <button mat-raised-button color="primary" (click)="saveTransaction()" >Save</button>
     </div>
   </div>
-  <div class="speech-error" *ngIf="boo && actionForm.invalid && speech">
-    Didn't get that. <a (click)="recognize()">Try again</a>
-  </div>
+
 </div>

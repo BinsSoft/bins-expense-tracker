@@ -1,6 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {RestService} from "./rest.service";
 import {Observable, Subject} from "rxjs";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
@@ -24,27 +25,28 @@ export class TransactionService {
   transactionList: any =[];
   userList: any = [];
   categoryList:any = [];
-  constructor(private restService:RestService) { }
+  constructor(private restService:RestService, private _snackBar: MatSnackBar) { }
 
   fetch() {
     const mobileNo: any = window.localStorage.getItem('_user');
     if (mobileNo) {
-      this.restService.getContent(mobileNo+'/config.json').subscribe((response:any)=>{
-        this.configSha = response.sha;
-        const config:any = JSON.parse(atob(response.content));
-        this.userList = config.users;
-        this.categoryList = config.category;
-        this.getAllCategory();
-        this.getAllUsers();
-        setTimeout(()=>{
-          this.restService.getContent(mobileNo+'/transactions.json').subscribe((response:any)=>{
-            this.transactionSha = response.sha;
+      this.restService.getContent(mobileNo+'/transactions.json').subscribe((response:any)=>{
+        this.transactionSha = response.sha;
 
-            this.transactionList = JSON.parse(atob(response.content));
-            this.emitAllTransactions();
-          });
-        }, 1000)
+        this.transactionList = JSON.parse(atob(response.content));
+        this.emitAllTransactions();
       });
+      // this.restService.getContent(mobileNo+'/config.json').subscribe((response:any)=>{
+      //   this.configSha = response.sha;
+      //   const config:any = JSON.parse(atob(response.content));
+      //   this.userList = config.users;
+      //   this.categoryList = config.category;
+      //   this.getAllCategory();
+      //   this.getAllUsers();
+      //   setTimeout(()=>{
+      //
+      //   }, 1000)
+      // });
     }
   }
   emitAllTransactions() {
@@ -69,6 +71,11 @@ export class TransactionService {
       const mobileNo: any = window.localStorage.getItem('_user');
       this.restService.update(mobileNo + '/transactions.json', 'Update Transactions of ' + mobileNo, transactions, this.transactionSha).subscribe((response: any) => {
         window.localStorage.setItem('_t', JSON.stringify([]));
+        this._snackBar.open("Synced Successful", "",{
+          duration: 2000,
+          horizontalPosition:'center',
+          verticalPosition:"top"
+        })
       });
     }
   }

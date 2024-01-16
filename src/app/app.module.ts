@@ -24,6 +24,7 @@ import { CateoryFlagPipe } from './pipes/cateory-flag.pipe';
 import { UserFlagPipe } from './pipes/user-flag.pipe';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { SpeekToTransactionComponent } from './component/dialog/speek-to-transaction/speek-to-transaction.component';
+import { CustomAmountPipe } from './pipes/custom-amount.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SpeekToTransactionComponent } from './component/dialog/speek-to-transac
     CateoryFlagPipe,
     UserFlagPipe,
     NotificationsComponent,
-    SpeekToTransactionComponent
+    SpeekToTransactionComponent,
+    CustomAmountPipe
   ],
   imports: [
     BrowserModule,

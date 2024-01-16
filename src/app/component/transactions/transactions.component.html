@@ -8,13 +8,16 @@
   </div>
 
   <div class="trans-group">
-    <div class="group-left" (click)="makeTransaction(1)">
-      <span >Credit <mat-icon>add_circle</mat-icon></span>
-      <label class="earn">{{totalEarn| currency:'INR'}}</label>
+    <div class="group-left" >
+      <span (click)="makeTransaction(1)">Credit <mat-icon>add_circle</mat-icon></span>
+      <label class="earn">{{ (showCredit)? (totalEarn| currency:'INR'): '******' }}
+      <mat-icon class="show-credit-icon" (click)="showCredit = !showCredit">{{ (showCredit)?'visibility':'visibility_off' }}</mat-icon></label>
     </div>
     <div class="group-middle">
       <span>Balance</span>
-      <label [ngClass]="{'earn':totalBalance>0, 'expense': totalBalance<0, 'warning': totalBalance< 100 && totalBalance>0}">{{totalBalance| currency:'INR'}}</label>
+      <label [ngClass]="{'earn':totalBalance>0, 'expense': totalBalance<0, 'warning': totalBalance< 100 && totalBalance>0}">{{ (showBalance)? (totalBalance| currency:'INR'): '******' }}
+        <mat-icon class="show-credit-icon" (click)="showBalance = !showBalance">{{ (showBalance)?'visibility':'visibility_off' }}</mat-icon>
+      </label>
     </div>
     <div class="group-right" (click)="makeTransaction(0)">
       <span >Debit <mat-icon>add_circle</mat-icon></span>
@@ -23,7 +26,7 @@
   </div>
   <div class="trans-list">
     <div class="trans-item" *ngFor="let tran of transactionList, let i=index">
-      <div class="trans-item-left" [ngClass]="{'earn':tran.t == 1, 'expense':tran.t == 0}" [innerHTML]="tran.c"></div>
+      <div class="trans-item-left"  [innerHTML]="tran.c|customAmount:tran"></div>
       <div class="trans-item-right">
         <div class="trans-d">{{tran.d|date}}</div>
         <mat-icon [matMenuTriggerFor]="menu">more_vert</mat-icon>

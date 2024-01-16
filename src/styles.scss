@@ -78,6 +78,24 @@ background: #49228d;}
   height: 50px;
   width: 50px;
 }
+.trans-list {
+  .trans-item {
+    .trans-item-left {
+      span {
+        font-size: 12px;
+        padding: 5px;
+        border-radius: 15px;
+        &.credit {
+          background: #287a55;
+        }
+
+        &.debit {
+          background: #d24b4b;
+        }
+      }
+    }
+  }
+}
 @keyframes spinner {
   to {transform: rotate(360deg);}
 }

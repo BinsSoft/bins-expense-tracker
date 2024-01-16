@@ -46,8 +46,13 @@
       label {
         font-size: 20px;
         font-family: Oswald-Medium, sans-serif;
+        .show-credit-icon {
+          font-size: 15px;
+          margin-left: 5px;
+        }
         &.earn {
           color: #38cc8a;
+          display: flex;
         }
         &.expense {
           color: #d24b4b;
@@ -70,15 +75,10 @@
       border-bottom: 1px solid #2e1f48;
       .trans-item-left {
         text-transform: uppercase;
-        font-family: Roboto-Medium, sans-serif;
-        font-size: 16px;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
         width: 70%;
-        &.earn {
-          color: #38cc8a;
-        }
-        &.expense {
-          color: #d24b4b;
-        }
+
       }
       .trans-item-right {
         display: flex;

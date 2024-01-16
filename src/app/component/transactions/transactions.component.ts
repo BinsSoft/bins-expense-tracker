@@ -22,6 +22,8 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   isFilter: boolean = false;
   categoryList: any =[];
   userList:any = [];
+  showCredit: boolean = false;
+  showBalance: boolean = false;
   constructor(
     private _snackBar: MatSnackBar,
     private transactionService: TransactionService,

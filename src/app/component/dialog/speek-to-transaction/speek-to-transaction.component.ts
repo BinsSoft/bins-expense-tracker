@@ -43,7 +43,7 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
       });
       this.speech = this.voice = this.data.item.c;
       this.boo = true;
-      console.log(this.speech)
+      // console.log(this.speech)
     } else {
       this.actionForm = this.fb.group({
         i: [this.data.newId],
@@ -56,9 +56,9 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (!this.data.item) {
-      this.recognize();
-    }
+    // if (!this.data.item) {
+    //   this.recognize();
+    // }
   }
 
 
@@ -106,7 +106,7 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
   }
 
   textAnalise() {
-    this.voice = this.voice.trim();
+    this.voice = this.speech.trim();
     if (this.voice) {
 
       this.voice = this.autocorrectService.autoCorrect(this.voice);
