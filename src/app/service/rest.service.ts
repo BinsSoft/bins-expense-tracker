@@ -14,7 +14,7 @@ export class RestService {
   }
   constructor(private http: HttpClient) {
 
-    this.header['Authorization'] = 'Bearer '+atob(atob('WjJod1gzcEdUMFZ5TVZKWU1teFVPR05CYVdOYVdsVnJOVGh3YUhSTFQwbENOVE52TUhCR2J3PT0='));
+    this.header['Authorization'] = 'Bearer '+atob(atob('WjJod1gwWkdRMUp5TlZCc01YTkRaamhvVmxaMFJrdDBaVGx6ZVhwQ09UWkplVE5vUW14RGNnPT0='));
     this.baseUrl = 'https://api.github.com/repos/BinsSoft/bins-api-container/contents/expense-tracker';
 
   }
