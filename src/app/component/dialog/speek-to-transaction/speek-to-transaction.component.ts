@@ -18,6 +18,7 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
   speechRecognition: any = null;
   actionForm: FormGroup;
   date: any = new Date();
+  addFuture:any = false;
   constructor(
 
     private _ngZone: NgZone,
@@ -39,9 +40,13 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
         t: [this.data.item.t, [Validators.required]],
         a: [this.data.item.a, [Validators.required]],
         d: [new Date(this.data.item.d), [Validators.required]],
-        c: ['']
+        c: [''],
+        f: [this.data.item.f],
+        r_i: [this.data.item.r_i]
       });
       this.speech = this.voice = this.data.item.c;
+      this.date = new Date(this.data.item.d);
+      this.addFuture = this.data.item.f;
       this.boo = true;
       // console.log(this.speech)
     } else {
@@ -50,8 +55,11 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
         t: [this.data.type, [Validators.required]],
         a: [null, [Validators.required]],
         d: [new Date(), [Validators.required]],
-        c: ['']
+        c: [''],
+        f: [false],
+        r_i: [this.data.r_i]
       })
+      this.speech = this.voice = this.data.c;
     }
   }
 
@@ -125,14 +133,20 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
 
 
   saveTransaction() {
+
     this.textAnalise();
-    if (!this.data.item) { // add new item
-      const transactions = this.commonService.getTransactionList();
-      transactions.push(this.actionForm.value);
-      this.commonService.setTransaction(transactions);
-    } else { // edit existing item
-      this.transactionService.editTransactions(this.actionForm.value);
+
+    this.actionForm.get('f')?.setValue(this.addFuture);
+    if (this.actionForm.valid) {
+      if (!this.data.item) { // add new item
+        const transactions = this.commonService.getTransactionList();
+        transactions.push(this.actionForm.value);
+        this.commonService.setTransaction(transactions);
+      } else { // edit existing item
+
+        this.transactionService.editTransactions(this.actionForm.value);
+      }
+      this.dialogRef.close();
     }
-    this.dialogRef.close();
   }
 }

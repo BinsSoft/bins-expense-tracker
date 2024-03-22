@@ -53,6 +53,8 @@ export class TransactionsComponent implements OnInit, OnDestroy {
     this.totalEarn  = this.transactionList.filter((t:any)=> t.t == 1).map((t:any)=>t.a).reduce((a:any, b:any) => a + b, 0);
 
     this.totalBalance = this.totalEarn - this.totalExpense;
+
+    // console.log(this.transactionList);
   }
 
   openTransactionFilter() {
