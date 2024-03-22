@@ -30,14 +30,22 @@ export class NotificationsComponent implements OnInit {
   }
   transactionAction(type:string, transactionItem:any, index:number) {
     if (type == 'remove') {
-      transactionItem.f = false;
-      this.transactionService.editTransactions(transactionItem);
-      this.transactionService.emitAllTransactions();
-      this._snackBar.open("Transaction is removed !!", "",{
+      this._snackBar.open("Want to remove from the list?", "Yes",{
         duration: 2000,
         horizontalPosition:'center',
         verticalPosition:"top"
-      })
+      }).afterDismissed().subscribe((response:any)=> {
+        if (response.dismissedByAction) {
+          transactionItem.f = false;
+          this.transactionService.editTransactions(transactionItem);
+          this.transactionService.emitAllTransactions();
+          this._snackBar.open("Transaction is removed !!", "", {
+            duration: 2000,
+            horizontalPosition: 'center',
+            verticalPosition: "top"
+          })
+        }
+      });
     }
     else if (type =='re-pay') {
       this.dialog.open(SpeekToTransactionComponent, {
