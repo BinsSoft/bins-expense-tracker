@@ -3,22 +3,34 @@
     <h2>Future List</h2>
    </div>
 
-
-  <div class="trans-list">
-    <div class="trans-item" *ngFor="let tran of transactionList, let i=index">
-      <div class="trans-item-left"  >
-        <span [innerHTML]="tran.c|customAmount:tran"></span>
-        <span class="trans-status {{tran.status}}" >{{tran.status}}</span>
+  <div class="card-container">
+    <div class="card-item" *ngFor="let tran of transactionList, let i=index">
+      <div class="card-title">
+        <p [innerHTML]="tran.c|customAmount:tran"></p>
       </div>
-
-      <div class="trans-item-right">
-        <div class="trans-d">{{tran.d|date}}</div>
-        <mat-icon [matMenuTriggerFor]="menu">more_vert</mat-icon>
-        <mat-menu #menu="matMenu" class="header-menu" >
-          <div class="sub-menu-content"><a (click)="transactionAction('re-pay', tran,i)">Repay</a></div>
-          <div class="sub-menu-content"><a (click)="transactionAction('remove', tran,i)">Remove from list</a></div>
-        </mat-menu>
+      <span class="trans-status {{tran.status}}" >{{tran.status}}</span>
+      <div class="card-item-action">
+        <button  (click)="transactionAction('re-pay', tran,i)" class="repay">Re-Pay</button>
+        <button (click)="transactionAction('remove', tran,i)" class="remove"> Remove</button>
       </div>
     </div>
   </div>
+
+<!--  <div class="trans-list">-->
+<!--    <div class="trans-item" *ngFor="let tran of transactionList, let i=index">-->
+<!--      <div class="trans-item-left"  >-->
+<!--        <span [innerHTML]="tran.c|customAmount:tran"></span>-->
+<!--        <span class="trans-status {{tran.status}}" >{{tran.status}}</span>-->
+<!--      </div>-->
+
+<!--      <div class="trans-item-right">-->
+<!--        <div class="trans-d">{{tran.d|date}}</div>-->
+<!--        <mat-icon [matMenuTriggerFor]="menu">more_vert</mat-icon>-->
+<!--        <mat-menu #menu="matMenu" class="header-menu" >-->
+<!--          <div class="sub-menu-content"><a (click)="transactionAction('re-pay', tran,i)">Repay</a></div>-->
+<!--          <div class="sub-menu-content"><a (click)="transactionAction('remove', tran,i)">Remove from list</a></div>-->
+<!--        </mat-menu>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 </div>
