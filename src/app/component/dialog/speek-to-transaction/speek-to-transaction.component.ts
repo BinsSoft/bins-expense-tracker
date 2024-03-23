@@ -5,6 +5,7 @@ import {AutocorrectService} from "./autocorrect.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {CommonService} from "../../../service/common.service";
 import {TransactionService} from "../../../service/transaction.service";
+import {RestService} from "../../../service/rest.service";
 @Component({
   selector: 'app-speek-to-transaction',
   templateUrl: './speek-to-transaction.component.html',
@@ -18,9 +19,12 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
   speechRecognition: any = null;
   actionForm: FormGroup;
   date: any = new Date();
-  addFuture:any = false;
-  constructor(
+  addToFavorites:any = false;
 
+  favoritesSha: any =null;
+  favoritesList:any =[];
+  constructor(
+    private restService: RestService,
     private _ngZone: NgZone,
     private fb: FormBuilder,
     private autocorrectService: AutocorrectService,
@@ -41,12 +45,11 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
         a: [this.data.item.a, [Validators.required]],
         d: [new Date(this.data.item.d), [Validators.required]],
         c: [''],
-        f: [this.data.item.f],
+        // f: [this.data.item.f],
         r_i: [this.data.item.r_i]
       });
       this.speech = this.voice = this.data.item.c;
       this.date = new Date(this.data.item.d);
-      this.addFuture = this.data.item.f;
       this.boo = true;
       // console.log(this.speech)
     } else {
@@ -56,7 +59,7 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
         a: [null, [Validators.required]],
         d: [new Date(), [Validators.required]],
         c: [''],
-        f: [false],
+        // f: [false],
         r_i: [this.data.r_i]
       })
       this.speech = this.voice = this.data.c;
@@ -124,7 +127,9 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
       }
       this.actionForm.get('c')?.setValue(this.voice);
       this.actionForm.get('d')?.setValue(this.date.getTime())
+      return this.voice.replace(amount,'');
     }
+    return "";
   }
 
   ngOnDestroy(): void {
@@ -132,21 +137,43 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
   }
 
 
-  saveTransaction() {
+  saveAction() {
 
-    this.textAnalise();
+    const content = this.textAnalise();
 
-    this.actionForm.get('f')?.setValue(this.addFuture);
+    // this.actionForm.get('f')?.setValue(this.addFuture);
     if (this.actionForm.valid) {
-      if (!this.data.item) { // add new item
-        const transactions = this.commonService.getTransactionList();
-        transactions.push(this.actionForm.value);
-        this.commonService.setTransaction(transactions);
-      } else { // edit existing item
 
-        this.transactionService.editTransactions(this.actionForm.value);
+      if (this.addToFavorites) {
+        const mobileNo: any = window.localStorage.getItem('_user');
+        this.restService.getContent(mobileNo+'/favorites.json').subscribe((response:any)=>{
+          this.favoritesSha = response.sha;
+          this.favoritesList = JSON.parse(atob(response.content));
+
+          const newFavoriteItem = {
+            i: this.favoritesList.length + 1,
+            c: content
+          };
+          this.actionForm.value.r_i = newFavoriteItem.i;
+          this.favoritesList.push(newFavoriteItem);
+          this.restService.update(mobileNo + '/favorites.json', 'Update favorites item of ' + mobileNo, this.favoritesList, this.favoritesSha).subscribe((response: any) => {
+            this.saveTransaction();
+          });
+        });
+      } else {
+        this.saveTransaction();
       }
       this.dialogRef.close();
+    }
+  }
+  saveTransaction() {
+    if (!this.data.item) { // add new item
+      const transactions = this.commonService.getTransactionList();
+      transactions.push(this.actionForm.value);
+      this.commonService.setTransaction(transactions);
+    } else { // edit existing item
+      if ((this.data.item.c == this.actionForm.value.c) && this.data.item.t == this.actionForm.value.t){ return  ; }
+      this.transactionService.editTransactions(this.actionForm.value);
     }
   }
 }

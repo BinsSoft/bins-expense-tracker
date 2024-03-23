@@ -4,7 +4,6 @@ import {MatDialog} from "@angular/material/dialog";
 import {TransactionFilterComponent} from "../dialog/transaction-filter/transaction-filter.component";
 import {TransactionService} from "../../service/transaction.service";
 import {Observable} from "rxjs";
-import {CategoryActionComponent} from "../dialog/category-action/category-action.component";
 import {SpeekToTransactionComponent} from "../dialog/speek-to-transaction/speek-to-transaction.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
@@ -94,6 +93,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   makeTransaction(transactionType: number) {
     this.dialog.open(SpeekToTransactionComponent, {
       width: '80%',
+      autoFocus:false,
       data: {
         newId: this.transactionList.length+1,
         type: transactionType

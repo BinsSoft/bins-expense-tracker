@@ -8,12 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingComponent } from './component/landing/landing.component';
 import { ActionComponent } from './component/action/action.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { CategoryManageComponent } from './component/category-manage/category-manage.component';
-import { UserManageComponent } from './component/user-manage/user-manage.component';
 import { HeaderComponent } from './component/header/header.component';
-import { CategoryAddComponent } from './component/dialog/category-add/category-add.component';
-import { CategoryTreeComponent } from './component/category-tree/category-tree.component';
-import { CategoryActionComponent } from './component/dialog/category-action/category-action.component';
 import { TransactionsComponent } from './component/transactions/transactions.component';
 import { UsersAddComponent } from './component/dialog/users-add/users-add.component';
 import { TransactionFilterComponent } from './component/dialog/transaction-filter/transaction-filter.component';
@@ -25,18 +20,14 @@ import { UserFlagPipe } from './pipes/user-flag.pipe';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { SpeekToTransactionComponent } from './component/dialog/speek-to-transaction/speek-to-transaction.component';
 import { CustomAmountPipe } from './pipes/custom-amount.pipe';
+import { FavoritesManageComponent } from './component/dialog/favorites-manage/favorites-manage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     ActionComponent,
-    CategoryManageComponent,
-    UserManageComponent,
     HeaderComponent,
-    CategoryAddComponent,
-    CategoryTreeComponent,
-    CategoryActionComponent,
     TransactionsComponent,
     UsersAddComponent,
     TransactionFilterComponent,
@@ -46,7 +37,8 @@ import { CustomAmountPipe } from './pipes/custom-amount.pipe';
     UserFlagPipe,
     NotificationsComponent,
     SpeekToTransactionComponent,
-    CustomAmountPipe
+    CustomAmountPipe,
+    FavoritesManageComponent
   ],
   imports: [
     BrowserModule,

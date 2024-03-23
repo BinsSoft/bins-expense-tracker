@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CommonService} from "../../service/common.service";
 import {MatDialog} from "@angular/material/dialog";
-import {CategoryActionComponent} from "../dialog/category-action/category-action.component";
 import {Router} from "@angular/router";
 import {TransactionService} from "../../service/transaction.service";
 
@@ -44,18 +43,7 @@ export class ActionComponent implements OnInit {
   }
 
   displaySelectedCategory: string = '';
-  selectCategory() {
-    this.dialog.open(CategoryActionComponent, {
-      width: '80%'
-    }).afterClosed().subscribe((result:any)=>{
-      if (result) {
-        result.forEach((c:any)=>{
-          this.displaySelectedCategory += c.name+" ";
-        })
-        this.actionForm.get('c')?.setValue(result.map((c:any)=> c.id).toString());
-      }
-    });
-  }
+
 
   saveTransaction() {
     this.actionForm.value.d = this.actionForm.value.d.getTime();

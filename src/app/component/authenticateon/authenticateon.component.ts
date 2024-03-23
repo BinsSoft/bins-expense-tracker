@@ -54,31 +54,22 @@ export class AuthenticateonComponent implements OnInit {
     this.restService.checkUser(mobileNo).subscribe((response:any)=>{
 
     }, (error:any)=>{
-      if (error.status == 404) {
-        this.restService.create(this.authForm.value.mobileNo+'/config.json','create new config for '+mobileNo, {
-          "users":[],
-          "category":[]
-        }).subscribe((response:any)=>{
+      this.restService.create(this.authForm.value.mobileNo+'/transactions.json', 'create new transaction for '+mobileNo,[]).subscribe((response:any)=>{
 
-          setTimeout(()=>{
-            this.restService.create(this.authForm.value.mobileNo+'/transactions.json', 'create new transaction for '+mobileNo,[]).subscribe((response:any)=>{});
-            this.loader = false;
-            this.message = {
-              message:'Thank you for joining...',
-              status: true
-            }
-            setTimeout(()=>{
-              this.message = {
-                message:'',
-                status: null
-              }
-            },3000)
-            }, 2000)
+        this.restService.create(this.authForm.value.mobileNo+'/favorites.json', 'create new favorites list for '+mobileNo,[]).subscribe((response:any)=>{});
+        this.loader = false;
+        this.message = {
+          message:'Thank you for joining...',
+          status: true
+        }
+        setTimeout(()=>{
+          this.message = {
+            message:'',
+            status: null
+          }
+        },3000)
+      });
 
-        });
-
-
-      }
     });
   }
 

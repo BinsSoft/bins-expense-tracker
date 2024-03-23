@@ -21,11 +21,11 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
-      <div class="form-row">
-        <mat-checkbox [(ngModel)]="addFuture"> Add in future list </mat-checkbox>
+      <div class="form-row" *ngIf="!actionForm.value.r_i">
+        <mat-checkbox [(ngModel)]="addToFavorites"> Add to favourites </mat-checkbox>
       </div>
       <br/>
-      <button mat-raised-button color="primary" (click)="saveTransaction()" >Save</button>
+      <button mat-raised-button color="primary" (click)="saveAction()" >Save</button>
     </div>
   </div>
 

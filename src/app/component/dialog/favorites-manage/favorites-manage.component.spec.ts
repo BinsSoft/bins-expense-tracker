@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CategoryActionComponent } from './category-action.component';
+import { FavoritesManageComponent } from './favorites-manage.component';
 
-describe('CategoryActionComponent', () => {
-  let component: CategoryActionComponent;
-  let fixture: ComponentFixture<CategoryActionComponent>;
+describe('FavoritesManageComponent', () => {
+  let component: FavoritesManageComponent;
+  let fixture: ComponentFixture<FavoritesManageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CategoryActionComponent ]
+      declarations: [ FavoritesManageComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CategoryActionComponent);
+    fixture = TestBed.createComponent(FavoritesManageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {CommonService} from "../../../service/common.service";
-import {CategoryActionComponent} from "../category-action/category-action.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TransactionService} from "../../../service/transaction.service";
@@ -34,18 +33,7 @@ export class TransactionFilterComponent implements OnInit {
   }
 
   displaySelectedCategory: string = '';
-  selectCategory() {
-    this.dialog.open(CategoryActionComponent, {
-      width: '80%'
-    }).afterClosed().subscribe((result:any)=>{
-      if (result) {
-        result.forEach((c:any)=>{
-          this.displaySelectedCategory += c.name+" ";
-        })
-        this.searchForm.value.c = (result.map((c:any)=> c.id).toString());
-      }
-    });
-  }
+
 
   filterAction() {
     if (this.searchForm.value.sd) {
