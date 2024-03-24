@@ -21,6 +21,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { SpeekToTransactionComponent } from './component/dialog/speek-to-transaction/speek-to-transaction.component';
 import { CustomAmountPipe } from './pipes/custom-amount.pipe';
 import { FavoritesManageComponent } from './component/dialog/favorites-manage/favorites-manage.component';
+import { ArchiveManageComponent } from './component/archive-manage/archive-manage.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FavoritesManageComponent } from './component/dialog/favorites-manage/fa
     NotificationsComponent,
     SpeekToTransactionComponent,
     CustomAmountPipe,
-    FavoritesManageComponent
+    FavoritesManageComponent,
+    ArchiveManageComponent
   ],
   imports: [
     BrowserModule,

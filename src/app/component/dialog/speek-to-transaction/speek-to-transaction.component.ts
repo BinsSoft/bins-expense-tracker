@@ -76,6 +76,7 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
   getTranscript({ locale = 'en-US' }: { locale?: string } = {}): Observable<string> {
 
     return new Observable(observer => {
+
       this.speechRecognition.onresult = (speechRecognitionEvent:any) => {
         var interim_transcript = '';
         for (var i = speechRecognitionEvent.resultIndex; i < speechRecognitionEvent.results.length; ++i) {
@@ -92,7 +93,7 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
 
         }
       };
-      this.speechRecognition.start();
+
 
       return () => this.speechRecognition.abort();
     });
@@ -100,6 +101,7 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
   recognize() {
     this.voice = '';
     this.speech = '';
+    this.speechRecognition.start();
     this.getTranscript()
       .subscribe(transcript => {
         if (transcript !== '' && this.boo) {
