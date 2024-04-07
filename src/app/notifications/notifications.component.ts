@@ -25,10 +25,9 @@ export class NotificationsComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router
     ) {
-    // this.transactionService.transactions.subscribe((transaction:any)=>{
-    //   this.generateTransactions(transaction);
-    //
-    // });
+    this.transactionService.transactions.subscribe((transaction:any)=>{
+      this.generateTransactions(transaction);
+    });
   }
 
 
@@ -47,6 +46,16 @@ export class NotificationsComponent implements OnInit {
     })
   }
 
+  generateTransactions(list:any) {
+    const rawList = list;
+    this.favoritesList = this.favoritesList
+      .map((item:any)=>{
+        return {
+          ...item,
+          status: (list.filter((i:any)=> i.r_i == item.i && new Date(i.d).getMonth() == new Date().getMonth()).length>0 )? '':'PENDING'
+        }
+      });
+  }
   transactionAction(type:string, transactionItem:any, index:number) {
     if (type == 'remove') {
       this._snackBar.open("Want to remove from the list?", "Yes",{
@@ -83,6 +92,7 @@ export class NotificationsComponent implements OnInit {
       })
     }
     else if (type =='re-pay') {
+      console.log(transactionItem);
       this.dialog.open(SpeekToTransactionComponent, {
         width: '80%',
         data: {

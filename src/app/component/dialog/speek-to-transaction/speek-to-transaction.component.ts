@@ -52,8 +52,9 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
       this.date = new Date(this.data.item.d);
       this.boo = true;
     } else {
+      let _t_t:any = this.commonService.getmaxTransactionItem();
       this.actionForm = this.fb.group({
-        i: [this.data.newId],
+        i: [_t_t+1],
         t: [this.data.type, [Validators.required]],
         a: [null, [Validators.required]],
         d: [new Date(), [Validators.required]],
@@ -173,7 +174,6 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
             this.saveTransaction();
           });
         });
-        this.saveTransaction();
       } else {
         this.saveTransaction();
       }

@@ -53,7 +53,8 @@ export class TransactionsComponent implements OnInit, OnDestroy {
 
     this.totalBalance = this.totalEarn - this.totalExpense;
 
-    // console.log(this.transactionList);
+    // console.log(this.transactionList)
+    this.commonService.setMaxTransactionItem(Math.max(...this.transactionList.map((o:any) => o.i)));
   }
 
   openTransactionFilter() {
@@ -111,6 +112,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
     }).afterDismissed().subscribe((response:any)=>{
       if (response.dismissedByAction) {
         let index = this.transactionList.findIndex((t:any)=>t.i == transactionItem.i);
+        console.log(this.transactionList, index, transactionItem);
         this.transactionList.splice(index,1);
         this.transactionList = [... this.transactionList];
         this.transactionService.deleteTransactions(transactionItem);

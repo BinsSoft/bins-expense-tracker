@@ -55,4 +55,12 @@ export class CommonService {
     window.localStorage.setItem('_u', JSON.stringify(users));
   }
 
+  setMaxTransactionItem(totalItem:any) {
+    window.localStorage.setItem('_m_t', totalItem);
+  }
+  getmaxTransactionItem() {
+    return Number(window.localStorage.getItem('_m_t'));
+  }
+
+
 }
