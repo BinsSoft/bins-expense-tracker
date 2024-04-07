@@ -25,10 +25,10 @@ export class NotificationsComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router
     ) {
-    this.transactionService.transactions.subscribe((transaction:any)=>{
-      this.generateTransactions(transaction);
-
-    });
+    // this.transactionService.transactions.subscribe((transaction:any)=>{
+    //   this.generateTransactions(transaction);
+    //
+    // });
   }
 
 
@@ -37,19 +37,16 @@ export class NotificationsComponent implements OnInit {
     this.restService.getContent(this.authUser+'/favorites.json').subscribe((response:any)=>{
       this.favoritesSha = response.sha;
       this.favoritesList = JSON.parse(atob(response.content));
+      this.favoritesList = this.favoritesList
+        .map((item:any)=>{
+          return {
+            ...item,
+            status: (new Date(item.l_p_t).getMonth() == new Date().getMonth() )? '':'PENDING'
+          }
+        });
     })
   }
 
-  generateTransactions(list:any) {
-    const rawList = list;
-    this.favoritesList = this.favoritesList
-      .map((item:any)=>{
-        return {
-          ...item,
-          status: (list.filter((i:any)=> i.r_i == item.i && new Date(i.d).getMonth() == new Date().getMonth()).length>0 )? '':'PENDING'
-        }
-      });
-  }
   transactionAction(type:string, transactionItem:any, index:number) {
     if (type == 'remove') {
       this._snackBar.open("Want to remove from the list?", "Yes",{
@@ -90,7 +87,7 @@ export class NotificationsComponent implements OnInit {
         width: '80%',
         data: {
           newId: this.transactionList.length+1,
-          type: transactionItem.type,
+          type: transactionItem.t,
           c: transactionItem.c,
           r_i: transactionItem.i
         }

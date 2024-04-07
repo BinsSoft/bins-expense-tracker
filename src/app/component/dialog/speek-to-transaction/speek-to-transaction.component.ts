@@ -51,7 +51,6 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
       this.speech = this.voice = this.data.item.c;
       this.date = new Date(this.data.item.d);
       this.boo = true;
-      // console.log(this.speech)
     } else {
       this.actionForm = this.fb.group({
         i: [this.data.newId],
@@ -143,7 +142,6 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
 
     const content = this.textAnalise();
 
-    // this.actionForm.get('f')?.setValue(this.addFuture);
     if (this.actionForm.valid) {
 
       if (this.addToFavorites) {
@@ -162,6 +160,20 @@ export class SpeekToTransactionComponent implements OnInit, OnDestroy {
             this.saveTransaction();
           });
         });
+      } else if (this.actionForm.value.r_i) {
+        const mobileNo: any = window.localStorage.getItem('_user');
+        this.restService.getContent(mobileNo+'/favorites.json').subscribe((response:any)=>{
+          this.favoritesSha = response.sha;
+          this.favoritesList = JSON.parse(atob(response.content));
+
+          let index = this.favoritesList.findIndex((f:any)=>f.i == this.actionForm.value.r_i);
+          this.favoritesList[index].l_p_t = this.actionForm.value.d;
+          this.restService.update(mobileNo + '/favorites.json', 'Update fav item of ' + mobileNo, this.favoritesList, this.favoritesSha).subscribe((response: any) => {
+
+            this.saveTransaction();
+          });
+        });
+        this.saveTransaction();
       } else {
         this.saveTransaction();
       }
