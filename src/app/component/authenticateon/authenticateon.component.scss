@@ -1,25 +1,26 @@
 .auth-container {
+  background: #2c2c2c;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   .logo {
-    font-size: 25px;
-    padding: 15px;
-    color: #FFF;
+    color: #FFFFFF;
     font-family: Oswald-Medium, sans-serif;
-    label {
-      //display: block;
+    span:first-child {
+      font-size: 23px;
     }
-    span {
-      font-size: 40px;
+    span:last-child {
+      font-size: 16px;
     }
+    padding: 20px;
   }
   .action {
     position: relative;
     background: #FFFFFF;
     padding: 10px;
+    width: 75vw;
     .form-row {
       padding: 5px;
     }

@@ -25,9 +25,7 @@ export class NotificationsComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router
     ) {
-    this.transactionService.transactions.subscribe((transaction:any)=>{
-      this.generateTransactions(transaction);
-    });
+
   }
 
 
@@ -40,22 +38,14 @@ export class NotificationsComponent implements OnInit {
         .map((item:any)=>{
           return {
             ...item,
-            status: (new Date(item.l_p_t).getMonth() == new Date().getMonth() )? '':'PENDING'
+            status: (new Date(item.l_p_t).getMonth() == new Date().getMonth() )? '':'PENDING',
+            s: (new Date(item.l_p_t).getMonth() == new Date().getMonth() ) ? 0:1
           }
-        });
+        }).sort((a:any,b:any)=>b.s - a.s);
     })
   }
 
-  generateTransactions(list:any) {
-    const rawList = list;
-    this.favoritesList = this.favoritesList
-      .map((item:any)=>{
-        return {
-          ...item,
-          status: (list.filter((i:any)=> i.r_i == item.i && new Date(i.d).getMonth() == new Date().getMonth()).length>0 )? '':'PENDING'
-        }
-      });
-  }
+
   transactionAction(type:string, transactionItem:any, index:number) {
     if (type == 'remove') {
       this._snackBar.open("Want to remove from the list?", "Yes",{
@@ -85,10 +75,12 @@ export class NotificationsComponent implements OnInit {
           index: index
         }
       }).afterClosed().subscribe((response:any)=>{
-        this.favoritesList[index].c = response;
-        this.restService.update(this.authUser + '/favorites.json', 'Update Transactions of ' + this.authUser, this.favoritesList, this.favoritesSha).subscribe((response: any) => {
-          this.favoritesSha = response.content.sha
-        });
+        if (response) {
+          this.favoritesList[index].c = response;
+          this.restService.update(this.authUser + '/favorites.json', 'Update Transactions of ' + this.authUser, this.favoritesList, this.favoritesSha).subscribe((response: any) => {
+            this.favoritesSha = response.content.sha
+          });
+        }
       })
     }
     else if (type =='re-pay') {
@@ -108,7 +100,6 @@ export class NotificationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.transactionService.emitAllTransactions();
     this.getFavoritesList();
   }
 

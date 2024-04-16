@@ -1,73 +1,72 @@
 
 .trans-container {
-  h2 {
-    color: #FFFFFF;
-    font-family: Oswald-Medium, sans-serif;
+  .trans-action {
+    display: flex;
+    justify-content: space-between;
     padding: 10px;
+    align-items: center;
   }
   .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0px 0px 6px #cfcece;
+    margin: 10px;
     .card-item {
-      width: 40%;
-      background: #6d46b2;
+
       margin: 10px 0;
       padding: 10px;
       border-radius: 5px;
-      border: 1px solid #7f6f9b;
       display: flex;
-      flex-direction: column;
       position: relative;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #e0e0e0;
       .card-title {
-        color: #FFFFFF;
         font-size: 15px;
         font-weight: 500;
         margin: 20px 0;
-        text-align: center;
-        //min-height: 70px;
-
+        width: 40%;
       }
       .trans-status {
         text-align: center;
         font-size: 10px;
         font-weight: 500;
-        position: absolute;
-        transform: rotate(-39deg);
-        top: 0px;
-        left: -16px;
+        //position: absolute;
+        //transform: rotate(-39deg);
+        //top: 0px;
+        //left: -16px;
         padding: 3px 10px;
         border-radius: 10px;
+        width: 11%;
         &.PENDING {
           background: #d24b4b;
           color: #f6e0e0;
         }
       }
       .card-item-action {
-        //position: absolute;
-        width: 95%;
-        //bottom: 0;
-        //left: 0;
+        width: 43%;
         text-align: center;
         padding: 5px 0;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: flex-end;
         button {
           padding: 7px;
           border: none;
-          margin: 5px 0;
+          margin: 5px;
           border-radius: 5px;
           font-size: 12px;
           font-weight: bold;
-          background: #49228d;
-          color: #f6e0e0;
           &.repay {
-            width: 100%;
+            background: #c0fbcb;
+            border: 1px solid #aae4b5;
           }
-          &.edit, &.remove {
-            width: 45%;
+          &.edit {
+            background: #c0ebfb;
+            border: 1px solid #aad4e3;
+          }
+          &.delete {
+            background: #ffcccc;
+            border: 1px solid #efb6b6;
           }
         }
       }

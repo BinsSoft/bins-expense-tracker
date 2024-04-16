@@ -18,6 +18,7 @@ export class TransactionFilterComponent implements OnInit {
       c: [null ],
       sd:[],
       ed:[],
+      t:[]
     })
   }
 

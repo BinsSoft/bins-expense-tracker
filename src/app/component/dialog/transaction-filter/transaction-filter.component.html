@@ -21,6 +21,15 @@
       </mat-form-field>
     </div>
     <div class="form-row">
+      <mat-form-field>
+        <mat-label>Transaction Type</mat-label>
+        <mat-select formControlName="t">
+          <mat-option [value]="0">Only Debit</mat-option>
+          <mat-option [value]="1">Only Credit</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
       <button mat-raised-button color="primary" (click)="filterAction()" >Filter</button>
     </div>
   </form>

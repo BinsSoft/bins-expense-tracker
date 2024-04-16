@@ -1,6 +1,8 @@
 <div class="trans-container">
   <div class="trans-action">
     <h2>My Favorites</h2>
+
+    <button [routerLink]="['/transactions']" mat-raised-button color="primary">Back <mat-icon>keyboard_arrow_right</mat-icon></button>
    </div>
 
   <div class="card-container">
@@ -9,10 +11,11 @@
         <p [innerHTML]="tran.c"></p>
       </div>
       <span class="trans-status {{tran.status}}" >{{tran.status}}</span>
+<!--      <div class="card-action"><mat-icon>{{ tran.expend?'keyboard_arrow_down':'keyboard_arrow_right' }}</mat-icon></div>-->
       <div class="card-item-action">
-        <button  (click)="transactionAction('re-pay', tran,i)" class="repay">Re-Pay</button>
-        <button (click)="transactionAction('edit', tran,i)" class="edit"> Edit</button>
-        <button (click)="transactionAction('remove', tran,i)" class="remove"> Remove</button>
+        <button  (click)="transactionAction('re-pay', tran,i)" class="repay"><i class="fa fa-money"></i></button>
+        <button (click)="transactionAction('edit', tran,i)" class="edit"> <i class="fa fa-pencil"></i></button>
+        <button (click)="transactionAction('remove', tran,i)" class="delete"><i class="fa fa-trash"></i></button>
       </div>
     </div>
   </div>

@@ -10,6 +10,7 @@ export class CustomAmountPipe implements PipeTransform {
     let transactionItem: any = args[0];
     if (transactionItem) {
       text = text.replace(transactionItem.a.toString() , '<span class="'+(transactionItem.t == 1? "credit": "debit")+'">'+transactionItem.a+'</span>')
+      // text = text.replace(transactionItem.a.toString() , '')
     }
     return text;
   }

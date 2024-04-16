@@ -68,7 +68,8 @@ export class TransactionsComponent implements OnInit, OnDestroy {
           return (filterData) && (
             ((filterData.c && tran.c.toLowerCase().indexOf(filterData.c.toLowerCase())> -1) || filterData.c == null) &&
             ((filterData.sd && filterData.sd <= tran.d) || filterData.sd == null) &&
-            ((filterData.ed && filterData.ed >= tran.d) || filterData.ed == null)
+            ((filterData.ed && filterData.ed >= tran.d) || filterData.ed == null) &&
+            ((filterData.t === tran.t) || filterData.t == null)
           );
         })
         this.totalExpense = this.transactionList.filter((t:any)=> t.t == 0).map((t:any)=>t.a).reduce((a:any, b:any) => a + b, 0);
@@ -112,7 +113,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
     }).afterDismissed().subscribe((response:any)=>{
       if (response.dismissedByAction) {
         let index = this.transactionList.findIndex((t:any)=>t.i == transactionItem.i);
-        console.log(this.transactionList, index, transactionItem);
+        // console.log(this.transactionList, index, transactionItem);
         this.transactionList.splice(index,1);
         this.transactionList = [... this.transactionList];
         this.transactionService.deleteTransactions(transactionItem);
@@ -130,5 +131,10 @@ export class TransactionsComponent implements OnInit, OnDestroy {
     }).afterClosed().subscribe((result:any)=>{
       this.transactionService.emitAllTransactions();
     });
+  }
+
+  syncData() {
+    this.transactionService.updateTransactions();
+
   }
 }

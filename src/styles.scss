@@ -17,18 +17,22 @@
   src: url("Oswald-Medium.ttf");
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
-background: #49228d;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;background: #fafafa;}
 
 .header {
   display: flex;
-  justify-content: space-between;
-  background: #e7e0f4;
+  justify-content: center;
+  padding: 10px 0;
+  //background: #e7e0f4;
   .logo {
-    font-size: 15px;
-    padding: 15px;
     font-family: Oswald-Medium, sans-serif;
-    color: #000;
+    span:first-child {
+      font-size: 23px;
+    }
+    span:last-child {
+      font-size: 16px;
+    }
+    padding: 20px;
     a {
       color: #4814a5;
       text-decoration: none;
@@ -86,11 +90,12 @@ background: #49228d;}
         padding: 5px;
         border-radius: 15px;
         &.credit {
-          background: #287a55;
-        }
+          color: #55af55;
 
+        }
         &.debit {
-          background: #d24b4b;
+          color: #f16565;
+
         }
       }
     }

@@ -1,22 +1,40 @@
 .landing-container {
+  background: #2c2c2c;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  .logo {
-    font-size: 25px;
-    padding: 15px;
-    color: #FFF;
+  position: relative;
+  .header-title {
+    font-size: 44px;
     font-family: Oswald-Medium, sans-serif;
-    label {
-      //display: block;
-    }
-    span {
-      font-size: 40px;
-    }
+    color: #FFFFFF;
+    line-height: 120%;
+    text-align: left;
+    width: 77%;
+    margin: 0 auto;
+    height: 28vh;
+    //padding-top: 40%;
   }
-  .action {
-    padding: 10px;
+  .logo-content {
+    background: #f4f4f4;
+    padding: 100px 0;
+    position: absolute;
+    bottom: -1px;
+    width: 100%;
+    .logo {
+      font-family: Oswald-Medium, sans-serif;
+      span:first-child {
+        font-size: 23px;
+      }
+      span:last-child {
+        font-size: 16px;
+      }
+      padding: 20px;
+    }
+    .action {
+      //padding: 30px 0;
+    }
   }
 }
