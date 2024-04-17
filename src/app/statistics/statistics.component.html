@@ -1,0 +1,48 @@
+<div class="trans-container">
+  <div class="trans-heading">
+    <h2>Statistics</h2>
+
+    <button [routerLink]="['/transactions']" mat-raised-button color="primary">Back <mat-icon>keyboard_arrow_right</mat-icon></button>
+  </div>
+  <div class="trans-head">
+    <h3>Total Amount</h3>
+    <h2>{{totalAmount| currency:'INR'}}</h2>
+    <!--    <h2>Transactions</h2>-->
+    <!--    <button *ngIf="!isFilter" mat-raised-button color="primary" (click)="openTransactionFilter()"><mat-icon>filter_list</mat-icon> Filter</button>-->
+    <!--    <button *ngIf="isFilter" mat-raised-button color="primary" (click)="clearFilter()"><mat-icon>filter_list</mat-icon> Clear Filter</button>-->
+  </div>
+  <div class="trans-action">
+
+    <div class="tran-action-item filter " (click)="openTransactionFilter()" *ngIf="!isFilter">
+      <label><i class="fa fa-filter"></i></label>
+      <span>Filter</span>
+    </div>
+    <div class="tran-action-item filter" (click)="clearFilter()" *ngIf="isFilter">
+      <label><i class="fa fa-filter"></i></label>
+      <span>Clear</span>
+    </div>
+    <div class="tran-action-item more" [matMenuTriggerFor]="menu">
+      <label><i class="fa fa-th-large"></i></label>
+      <span>More</span>
+      <mat-menu #menu="matMenu" class="header-menu" >
+        <div class="sub-menu-content"><a [routerLink]="['/transactions']">Transactions</a></div>
+        <div class="sub-menu-content"><a [routerLink]="['/notifications']">Favorites</a></div>
+        <div class="sub-menu-content"><a (click)="syncData()">Sync</a></div>
+        <!--      <div class="sub-menu-content"><a [routerLink]="['/archived']">Archive</a></div>-->
+      </mat-menu>
+    </div>
+  </div>
+  <div class="card-container">
+    <div class="card-item" *ngFor="let category of categoryList, let i=index">
+      <div class="card-title">
+        <p [innerHTML]="category.label"></p>
+      </div>
+      <div class="card-item-action">
+        {{category.amount|currency:'INR'}}
+      </div>
+      <div class="progress">
+        <mat-progress-bar mode="determinate" [value]="category.parcent"></mat-progress-bar>
+      </div>
+    </div>
+  </div>
+</div>

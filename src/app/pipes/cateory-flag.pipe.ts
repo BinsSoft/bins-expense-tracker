@@ -6,9 +6,7 @@ import {TransactionService} from "../service/transaction.service";
 })
 export class CateoryFlagPipe implements PipeTransform {
 
-  categoryList: any = [];
   constructor(private transactionService: TransactionService) {
-    this.categoryList = this.transactionService.getAllCategory();
   }
   transform(value: any, ...args: any[]): unknown {
     if (args.length > 0  && Array.isArray(args[0]) ) {

@@ -26,10 +26,8 @@ export class TransactionFilterComponent implements OnInit {
     'Earn',
     'Expense'
   ]
-  categoryList: any = [];
   users: any = [];
   ngOnInit(): void {
-    this.categoryList = this.transactionService.getAllCategory();
     this.users = this.transactionService.getAllUsers();
   }
 

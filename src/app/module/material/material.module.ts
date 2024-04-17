@@ -12,7 +12,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 const MaterialComponents = [
   MatButtonModule,
   MatFormFieldModule,
@@ -26,7 +26,8 @@ const MaterialComponents = [
   MatCheckboxModule,
   MatTabsModule,
   MatSlideToggleModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatProgressBarModule
 
 ]
 @NgModule({

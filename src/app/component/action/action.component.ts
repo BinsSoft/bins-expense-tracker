@@ -37,7 +37,7 @@ export class ActionComponent implements OnInit {
   showUser: boolean = false;
   ngOnInit(): void {
 
-    this.categoryList = this.transactionService.getAllCategory();
+    // this.categoryList = this.transactionService.getAllCategory();
     this.transactionList = this.transactionService.getAllTransactions();
     this.users = this.transactionService.getAllUsers();
   }

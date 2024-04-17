@@ -22,6 +22,7 @@ import { SpeekToTransactionComponent } from './component/dialog/speek-to-transac
 import { CustomAmountPipe } from './pipes/custom-amount.pipe';
 import { FavoritesManageComponent } from './component/dialog/favorites-manage/favorites-manage.component';
 import { ArchiveManageComponent } from './component/archive-manage/archive-manage.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ArchiveManageComponent } from './component/archive-manage/archive-manag
     SpeekToTransactionComponent,
     CustomAmountPipe,
     FavoritesManageComponent,
-    ArchiveManageComponent
+    ArchiveManageComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,

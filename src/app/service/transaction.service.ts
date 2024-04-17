@@ -19,6 +19,8 @@ export class TransactionService {
 
 
 
+
+
   categorySubject:Subject<any> = new Subject<any>();
   category: Observable<any> = this.categorySubject.asObservable();
 
@@ -128,13 +130,6 @@ export class TransactionService {
 
 
   }
-
-  getAllCategory() {
-    let categoryList: any = this.categoryList;
-    // categoryList = categoryList.concat(this.getLocalData('_c'));
-    this.categorySubject.next(categoryList);
-    return categoryList;
-  }
   getAllUsers() {
     let userList: any = this.userList;
     // userList = userList.concat(this.getLocalData('_u'));
@@ -142,14 +137,59 @@ export class TransactionService {
     return userList;
   }
 
-  updateConfig() {
-    const body: any = {
-      users: this.getAllUsers(),
-      category: this.getAllCategory()
-    }
-    const mobileNo: any = window.localStorage.getItem('_user');
-    this.restService.update(mobileNo + '/config.json', 'Update Config of ' + mobileNo, body, this.configSha).subscribe((response: any) => {
-      this.configSha = response.content.sha;
-    });
+
+  getAllCategory():any {
+    return [
+      {
+        label:'Savings',
+        keywords:['lic','apy','RD', 'FD', 'Mutual', ''],
+        amount:0
+      },
+      {
+        label:'Medical',
+        keywords:['Medicine','Doctor','Doc'],
+        amount:0
+      },
+      {
+        label:'Food',
+        keywords:['lunch','dinner','restaurant','food'],
+        amount:0
+      },
+      {
+        label:'Bill Pay',
+        keywords:['Bill'],
+        amount:0
+      },
+      {
+        label:'Recharge',
+        keywords:['Recharge'],
+        amount:0
+      },
+      {
+        label:'Travel',
+        keywords:['transport','bus','train',''],
+        amount:0
+      },
+      {
+        label:'Rent',
+        keywords:['rent'],
+        amount:0
+      },
+      {
+        label:'Marketing',
+        keywords:['marketing','market','shopping','grocery'],
+        amount:0
+      },
+      {
+        label:'Income',
+        keywords:[],
+        amount:0
+      },
+      {
+        label:'Others',
+        keywords:[],
+        amount:0
+      }
+    ]
   }
 }

@@ -7,6 +7,7 @@ import {AuthenticateonComponent} from "./component/authenticateon/authenticateon
 import {LayoutComponent} from "./component/layout/layout.component";
 import {NotificationsComponent} from "./notifications/notifications.component";
 import {ArchiveManageComponent} from "./component/archive-manage/archive-manage.component";
+import {StatisticsComponent} from "./statistics/statistics.component";
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path: 'notifications',
         component: NotificationsComponent
+      },
+      {
+        path: 'statistics',
+        component: StatisticsComponent
       },
       {
         path: 'archived',
