@@ -51,7 +51,9 @@ export class StatisticsComponent implements OnInit {
     // console.log(this.categoryList, this.totalAmount, list);
   }
   openTransactionFilter() {
-    this.dialog.open(TransactionFilterComponent).afterClosed().subscribe((filterData:any)=>{
+    this.dialog.open(TransactionFilterComponent, {
+      autoFocus:false
+    }).afterClosed().subscribe((filterData:any)=>{
       // console.log(filterData)
       if (filterData) {
         this.isFilter = true;
